@@ -1,0 +1,1 @@
+<img src="<?=SITE_TEMPLATE_PATH?>/assets/img/subscribe/subscribe-thumb.png" alt="prymery.major">

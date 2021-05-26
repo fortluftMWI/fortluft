@@ -1,0 +1,117 @@
+.catalog-link-container:hover .catalog-link-toggler{
+    border-radius: 0 !important;
+}
+.catalog-link:hover .parent-catalog-item:last-child .parent-catalog-link{
+    border-radius: 0 !important;
+}
+.catalog-link-toggler{
+    border-radius: 0 !important;
+}
+.catalog-link-submenu{
+    border-radius: 0 !important;
+}
+.proposal{
+    border-radius: 0 !important;
+}
+.offer{
+    border-radius: 0 !important;
+}
+.adp-btn{
+    border-radius: 0 !important;
+}
+.tabs-product li{
+    border-radius: 0 !important;
+}
+.post .post-category{
+    border-radius: 0 !important;
+}
+.post .post-category .icon{
+    border-radius: 0 !important;
+}
+.post .thumb{
+    border-radius: 0 !important;
+}
+.services-item{
+    border-radius: 0 !important;
+}
+.form-subscribe .form-control{
+    border-radius: 0 !important;
+}
+.product{
+    border-radius: 0 !important;
+}
+.product::before{
+    border-radius: 0 !important;
+}
+.form-header-search .form-control{
+    border-radius: 0 !important;
+}
+.user-links{
+    border-radius: 0 !important;
+}
+.advantage-item::before{
+    border-radius: 0 !important;
+}
+.advantage-item{
+    border-radius: 0 !important;
+}
+.filter__category{
+    border-radius: 0 !important;
+}
+.popular-cat__container + .product__sort{
+    border-radius: 0 !important;
+}
+.popular-cat__item{
+    border-radius: 0 !important;
+}
+.product-item__order{
+    border-radius: 0 !important;
+}
+.product-item__category{
+    border-radius: 0 !important;
+}
+.personal-link{
+    border-radius: 0 !important;
+}
+.cart__list{
+    border-radius: 0 !important;
+}
+.craft{
+    border-radius: 0 !important;
+}
+.product-item__quantity .quantity{
+    border-radius: 0 !important;
+}
+.product__sort{
+    border-radius: 0 !important;
+}
+.noBottomRadius{
+    border-radius: 0 !important;
+}
+.noTopRadius{
+    border-radius: 0 !important;
+}
+.personal-link:before{
+    border-radius: 0 !important;
+}
+.pagination{
+    border-radius: 0 !important;
+}
+.category{
+    border-radius: 0 !important;
+}
+.catalog-link-toggler, .parent-catalog-link, .catalog-link-container .icon{
+    color: white !important;
+}
+.adp-btn-primary:hover, .adp-btn-primary:active{
+    color: white;
+}
+.adp-btn-primary{
+    color: white;
+}
+.section-popular-product .add-basket{
+    color: black;
+}
+.section-popular-product{
+    color: white;
+}

@@ -1,0 +1,173 @@
+html {
+	box-sizing: border-box;
+}
+
+body {
+	left: 0;
+	position: relative;
+}
+
+.zeynep > ul {
+	padding-left: 0;
+}
+.zeynep ul > li.has-submenu > a { display: flex; position: relative; }
+.submenu-trigger{ position: absolute; top: 0; right: 0; height: 52px; display: inline-flex; width: 50px;}
+.zeynep .submenu.opened { z-index: 10; }
+
+/* zeynepjs menu styles */
+html.zeynep-opened {
+	overflow-x: hidden;
+}
+
+html.zeynep-opened body {
+	position: fixed;
+	width: 100%;
+}
+
+html.zeynep-opened .zeynep {
+	pointer-events: auto;
+}
+
+.zeynep {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	color: #161616;
+	overflow: hidden;
+	overflow-y: auto;
+	pointer-events: none;
+	z-index: 1011;
+	width: 100vw;
+	transform: translateX(220%);
+	background-color: #fff;
+	-webkit-overflow-scrolling: touch;
+	border-top: 1px solid #efefef;
+}
+
+.zeynep-opened .zeynep {
+	transform: translateX(0);
+}
+
+html:not(.no-transition) body,
+.zeynep:not(.no-transition),
+.zeynep .submenu:not(.no-transition) {
+	transition: all 0.6s;
+	transition-property: left, right, transform;
+}
+
+.zeynep-overlay {
+	background-color: rgba(0, 0, 0, .42);;
+	bottom: 0;
+	display: none;
+	left: 0;
+	position: fixed;
+	right: 0;
+	top: 0;
+	z-index: 1010;
+}
+
+.zeynep-opened .zeynep-overlay {
+	display: block;
+}
+
+.zeynep ul {
+  list-style-type: none;
+	padding: 0;
+	padding-left: 20px;
+	-webkit-overflow-scrolling: touch;
+}
+
+.zeynep ul > li {
+	display: block;
+}
+
+.zeynep ul > li > a {
+	color: inherit;
+	display: block;
+	font-size: 14px;
+	padding: 18px 20px;
+	text-decoration: none;
+	transition: all 0.3;
+}
+
+.zeynep ul > li > a:hover {
+	background-color: #efefef;
+	border-radius: 3px;
+}
+
+.zeynep ul > li:not(:last-child) > a {
+	border-bottom: 1px solid #efefef;
+}
+
+.zeynep ul > li.has-submenu > a {
+	background-image: url("../img/submenu-arrow.svg");
+	background-position: right 20px center;
+	background-repeat: no-repeat;
+	background-size: 8px 14px;
+}
+
+.zeynep ul > li.has-submenu > a:hover {
+	background-image: url("../img/submenu-arrow-active.svg");
+}
+
+/* zeynepjs submenu styles */
+.zeynep .submenu {
+	background-color: #ffffff;
+	bottom: 0;
+	left: 100%;
+	min-height: 100%;
+	overflow: hidden;
+	overflow-y: auto;
+	position: fixed;
+	top: 0;
+	width: 100%;
+}
+
+.zeynep .submenu.opened {
+	left: 0;
+}
+
+.zeynep .submenu-header {
+	background-image: url("../img/menu-back.svg");
+	background-position: left 20px center;
+	background-repeat: no-repeat;
+	background-size: 8px 14px;
+	border-bottom: solid 1px #efefef;
+	cursor: pointer;
+	position: relative;
+}
+
+.zeynep .submenu-header > a {
+	color: inherit;
+	display: block;
+	font-size: 14px;
+	font-weight: bold;
+	padding: 18px 20px;
+	padding-left: 40px;
+	text-decoration: none;
+}
+
+.zeynep .submenu-header > a:before {
+	background-image: url("../img/submenu-arrow.svg");
+	background-position: right 20px center;
+	background-repeat: no-repeat;
+	background-size: 8px 14px;
+	content: "";
+	height: 100%;
+	left: 26px;
+	position: absolute;
+	top: 0;
+	transform: rotate(-180deg);
+	width: 20px;
+}
+
+.zeynep .submenu > label {
+	color: var(--info);
+	display: block;
+	font-size: 13px;
+	font-weight: bold;
+	margin-bottom: 8px;
+	margin-top: 19px;
+	padding-left: 40px;
+	width: 100%;
+}
