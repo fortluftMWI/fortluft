@@ -1,4 +1,5 @@
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
+$APPLICATION->SetPageProperty("description", "Мы предлагаем широкий ассортимент качественных деталей для ремонта и тюнинга автомобильной выхлопной системы.");
 use \Bitrix\Main\Config\Option;
 $APPLICATION->SetTitle("Каталог");
 
@@ -22,7 +23,7 @@ $APPLICATION->IncludeComponent(
 		"OFFER_TREE_PROPS" => $tree_prop,
 		"COMMON_SHOW_CLOSE_POPUP" => "N",
 		"PRODUCT_SUBSCRIPTION" => "N",
-		"SHOW_DISCOUNT_PERCENT" => "N",
+		"SHOW_DISCOUNT_PERCENT" => "Y",
 		"SHOW_OLD_PRICE" => "Y",
 		"SHOW_MAX_QUANTITY" => "N",
 		"MESS_BTN_BUY" => "Купить",
@@ -234,6 +235,7 @@ $APPLICATION->IncludeComponent(
 		"SHOW_SKU_DESCRIPTION" => "N",
 		"DATA_LAYER_NAME" => "dataLayer",
 		"BRAND_PROPERTY" => "-",
+		"DISCOUNT_PERCENT_POSITION" => "bottom-right",
 		"SEF_URL_TEMPLATES" => array(
 			"sections" => "",
 			"section" => "#SECTION_CODE_PATH#/",
@@ -243,7 +245,4 @@ $APPLICATION->IncludeComponent(
 		)
 	),
 	false
-);?>
-
-
-<?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
+);?><?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
