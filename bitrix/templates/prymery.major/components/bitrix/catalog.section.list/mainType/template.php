@@ -43,8 +43,11 @@ if($arResult['TYPE_LIST']):?>
 	</div>
 </section>
 <?elseif($arResult['NOTYPE_LIST']):?>
-<section class="section-category">
+<section class="section-category pb-0">
 	<div class="container">
+	<?if($arParams['SECTION_TITLE']){?>
+		<div class="mb-5 section-title text-center"><?=$arParams['SECTION_TITLE']?></div>
+	<?}?>
 		<div class="row">
 			<div class="col-12">
 				<div class="tab-container">
@@ -56,7 +59,9 @@ if($arResult['TYPE_LIST']):?>
 										<div class="title"><?=$arSection['NAME']?></div>
 									</div>
 									<div class="thumb">
-										<img src="<?=$arSection['PICTURE']['SRC']?>" alt="<?=$arSection['NAME']?>">
+										<?if($arSection['PICTURE']['SRC']){?>
+											<img src="<?=$arSection['PICTURE']['SRC']?>" alt="<?=$arSection['NAME']?>">
+										<?}?>
 									</div>
 								</a>
 							</div>

@@ -17,13 +17,13 @@ if($arResult["ITEMS"]):?>
 						$this->AddDeleteAction($arItem['ID'], $arItem['DELETE_LINK'], CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_DELETE"), array("CONFIRM" => GetMessage('CT_BNL_ELEMENT_DELETE_CONFIRM')));
 						if($key == 2):?>
 							<div class="col-12 col-sm-10 col-md instagram-thumb-container">
-								<div class="instagram-thumb">
+								<a class="instagram-thumb" href="<?=$arItem['PROPERTIES']['LINK']['VALUE']?>" target="_blank">
 									<img src="<?=SITE_TEMPLATE_PATH?>/assets/img/instagram/instagram-phone.png" alt="">
 									<div class="instagram-thumb-inner" style="background-image: url(<?=$arItem['PREVIEW_PICTURE']['SRC']?>);"></div>
 									<a class="instagram-action" href="<?=$arItem['PROPERTIES']['LINK']['VALUE']?>" target="_blank">
 										<img src="<?=SITE_TEMPLATE_PATH?>/assets/img/instagram/instagram-btn.png" alt="<?=$arItem['NAME']?>">
 									</a>
-								</div>
+								</a>
 							</div>
                             <? elseif($key == 0):?>
                                 <div class="col-6 col-sm-3 col-md">
@@ -31,7 +31,7 @@ if($arResult["ITEMS"]):?>
                                             <div class="caption caption-like" style="background-color: #e30613">
                                                 <img src="/images/drive2.svg" style="height: 41px; border-radius: 10px;">
                                             </div>
-                                        <a href="<?=$arItem['PROPERTIES']['LINK']['VALUE']?>">
+                                        <a href="<?=$arItem['PROPERTIES']['LINK']['VALUE']?>"  target="_blank">
                                             <img src="<?=$arItem['PREVIEW_PICTURE']['SRC']?>" alt="<?=$arItem['NAME']?>">
                                         </a>
                                     </div>
@@ -40,7 +40,7 @@ if($arResult["ITEMS"]):?>
                                     <div class="col-6 col-sm-3 col-md">
                                         <div class="instagram-item" id="<?=$this->GetEditAreaId($arItem['ID']);?>">
                                                 <div class="caption caption-thumb" style="background-color: #415e9b"><svg><use xlink:href="#facebook-f"></use></svg></div>
-                                            <a href="<?=$arItem['PROPERTIES']['LINK']['VALUE']?>">
+                                            <a href="<?=$arItem['PROPERTIES']['LINK']['VALUE']?>" target="_blank">
                                                 <img src="<?=$arItem['PREVIEW_PICTURE']['SRC']?>" alt="<?=$arItem['NAME']?>">
                                             </a>
                                         </div>
@@ -49,7 +49,7 @@ if($arResult["ITEMS"]):?>
                                         <div class="col-6 col-sm-3 col-md">
                                             <div class="instagram-item" id="<?=$this->GetEditAreaId($arItem['ID']);?>">
                                                     <div class="caption caption-thumb" style="background-color: #2787f5;"><svg><use xlink:href="#vk"></use></svg></div>
-                                                <a href="<?=$arItem['PROPERTIES']['LINK']['VALUE']?>">
+                                                <a href="<?=$arItem['PROPERTIES']['LINK']['VALUE']?>"  target="_blank">
                                                     <img src="<?=$arItem['PREVIEW_PICTURE']['SRC']?>" alt="<?=$arItem['NAME']?>">
                                                 </a>
                                             </div>
@@ -58,7 +58,7 @@ if($arResult["ITEMS"]):?>
                                             <div class="col-6 col-sm-3 col-md">
                                                 <div class="instagram-item" id="<?=$this->GetEditAreaId($arItem['ID']);?>">
                                                         <div class="caption caption-like"><svg><use xlink:href="#youtube"></use></svg></div>
-                                                    <a href="<?=$arItem['PROPERTIES']['LINK']['VALUE']?>">
+                                                    <a href="<?=$arItem['PROPERTIES']['LINK']['VALUE']?>"  target="_blank">
                                                         <img src="<?=$arItem['PREVIEW_PICTURE']['SRC']?>" alt="<?=$arItem['NAME']?>">
                                                     </a>
                                                 </div>

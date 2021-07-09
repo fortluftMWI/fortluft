@@ -39,7 +39,10 @@ function initprForm(JS_OBJECT) {
         .submit(function (event) {
             submit = true;
             $(this).find('.required').each(function () {
-                if ($(this).val() == '') {
+				if($(this).attr('type')=='tel' && $(this).val().length<17){
+					$(this).addClass('novalid');
+                    submit = false;
+				} else if ($(this).val() == '') {
                     $(this).addClass('novalid');
                     submit = false;
                 }

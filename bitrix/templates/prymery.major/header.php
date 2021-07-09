@@ -329,14 +329,14 @@ while($ob = $res->GetNextElement())
 	false
 );?>
 				</div>
-				<div class="col-6 col-lg-auto order-3">
-					<a data-fancybox="" data-type="ajax" data-touch="false" data-src="<?=SITE_DIR?>ajax/form/feedback.php?ajax=y" href="javascript:void(0);" class="header-callback-link adp-btn adp-btn-white">
+				<div class="col-6 col-lg-auto order-3 white">
+					<a data-fancybox="" data-type="ajax" data-touch="false" data-src="<?=SITE_DIR?>ajax/form/feedback.php?ajax=y" href="javascript:void(0);" class="header-callback-link adp-btn adp-btn-primary with_prompt" data-prompt="Запросить обратный звонок">
 						<?=GetMessage('PRYMERY_FEEDBACK');?>
 					</a>
 				</div>
 				<div class="col-6 col-lg-3 order-4">
 					<ul class="user-links">
-						<li><a href="<?=SITE_DIR?>personal/">
+						<li><a href="<?=SITE_DIR?>personal/" class="adp-btn-white with_prompt" data-prompt="Личный кабинет">
                                 <img src="/bitrix/templates/prymery.major/assets/img/user.svg"
                                 <svg class="icon"><use xlink:href="#user"></use></svg></a>
                         </li>
@@ -349,7 +349,7 @@ while($ob = $res->GetNextElement())
                                 $favorites = array();
                             }
                             ?>
-                            <a href="<?=SITE_DIR?>favorites/" class="favoritesCount">
+                            <a href="<?=SITE_DIR?>favorites/" class="adp-btn-white with_prompt" data-prompt="Избранное">
                                 <img src="/bitrix/templates/prymery.major/assets/img/list_2.svg"
                                 <svg class="icon"><use xlink:href="#heart-outline"></use></svg>
                                 <span class="counter"<?if(count($favorites) == 0):?> style="display: none"<?endif;?>><?=count($favorites);?></span>
