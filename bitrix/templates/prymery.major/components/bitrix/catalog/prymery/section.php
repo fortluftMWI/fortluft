@@ -47,25 +47,20 @@ if ($isFilter) {
             <div class="row">
                 <div class="col-12 col-lg-3">
                     <div class="product-filter">
-                        <?$APPLICATION->IncludeComponent(
-                            "bitrix:menu",
-                            "catalog_vertical",
-                            array(
-                                "ROOT_MENU_TYPE" => "catalog",
-                                "MAX_LEVEL" => "3",
-                                "CHILD_MENU_TYPE" => "catalog",
-                                "USE_EXT" => "Y",
-                                "DELAY" => "N",
-                                "ALLOW_MULTI_SELECT" => "N",
-                                "MENU_CACHE_TYPE" => "A",
-                                "MENU_CACHE_TIME" => "360000",
-                                "MENU_CACHE_USE_GROUPS" => "Y",
-                                "MENU_CACHE_GET_VARS" => array(
-                                ),
-                                "COMPONENT_TEMPLATE" => "catalog"
-                            ),
-                            false
-                        );?>
+                        <? global $USER;
+                        if ($USER->IsAdmin()){?>
+                            <div class="container page_simple" style="padding: 0; border-radius: 0">
+                                <?$APPLICATION->IncludeComponent(
+                                    "finnit:finnit.filter",
+                                    "auto",
+                                    array(
+                                        "A_IBLOCK_ID" => 20,
+
+                                    )
+                                );?>
+                            </div>
+                        <?}?>
+
                         <? if ($isFilter): ?>
                             <? $APPLICATION->IncludeComponent(
                                 "bitrix:catalog.smart.filter",
@@ -99,6 +94,27 @@ if ($isFilter) {
                             );
                             ?>
                         <? endif ?>
+                        <?$APPLICATION->IncludeComponent(
+                            "bitrix:menu",
+                            "catalog_vertical",
+                            array(
+                                "ROOT_MENU_TYPE" => "catalog",
+                                "MAX_LEVEL" => "3",
+                                "CHILD_MENU_TYPE" => "catalog",
+                                "USE_EXT" => "Y",
+                                "DELAY" => "N",
+                                "ALLOW_MULTI_SELECT" => "N",
+                                "MENU_CACHE_TYPE" => "A",
+                                "MENU_CACHE_TIME" => "360000",
+                                "MENU_CACHE_USE_GROUPS" => "Y",
+                                "MENU_CACHE_GET_VARS" => array(
+                                ),
+                                "COMPONENT_TEMPLATE" => "catalog"
+                            ),
+                            false
+                        );?>
+
+
                     </div>
                     <div class="craft craft--desktop">
                         <?$APPLICATION->IncludeComponent(

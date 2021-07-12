@@ -1,4 +1,5 @@
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
+$APPLICATION->SetPageProperty("description", "Мы предлагаем широкий ассортимент качественных деталей для ремонта и тюнинга автомобильной выхлопной системы.");
 use \Bitrix\Main\Config\Option;
 $APPLICATION->SetTitle("FORTLUFT - детали для ремонта и тюнинга автомобильной выхлопной системы");
 ?>
