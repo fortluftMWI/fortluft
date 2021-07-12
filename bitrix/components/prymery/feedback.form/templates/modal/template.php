@@ -31,7 +31,8 @@ $this->setFrameMode(true);
 					</div>
 				<?else:?>
 					<div class="form-group is-empty">
-						<input placeholder="<?=GetMessage('PRYMERY_FF_FIELD_'.$field['CODE'])?><?= ($field['REQUIRED'] == 'Y') ? GetMessage('PRYMERY_REQUIRED')  : '' ?>" class="form-control<?= ($field['REQUIRED'] == 'Y') ? ' required' : '' ?>" name="<?= $field['CODE'] ?>" type="text">
+						<input placeholder="<?=GetMessage('PRYMERY_FF_FIELD_'.$field['CODE'])?><?= ($field['REQUIRED'] == 'Y') ? GetMessage('PRYMERY_REQUIRED')  : '' ?>" class="form-control<?= ($field['REQUIRED'] == 'Y') ? ' required' : '' ?>" name="<?= $field['CODE'] ?>" 
+						type="<?if($field['CODE'] == 'PHONE') { echo 'tel'; } else {echo 'text'; }?>">
 					</div>
 				<?endif;
 			}?>

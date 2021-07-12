@@ -145,40 +145,7 @@ $APPLICATION->SetTitle("FORTLUFT - детали для ремонта и тюн�
 	</div>
 </section>
 <?endif;?>
-<?if(PRmajor::GetDisplayProp('USE_MAIN_CATEGORIES') != 'N'):?>
-<?$catalog_id = Option::get("prymery.major", "USE_MAIN_CATEGORIES",'',SITE_ID);
-    if(!$catalog_id){$catalog_id = PRmajor::CIBlock_Id("prymery_major_catalog","prymery_major_catalog");}
-    $APPLICATION->IncludeComponent("bitrix:catalog.section.list", "mainType", Array(
-        "VIEW_MODE" => "TEXT",	// Вид списка подразделов
-            "SHOW_PARENT_NAME" => "Y",	// Показывать название раздела
-            "IBLOCK_TYPE" => "prymery_major_catalog",	// Тип инфоблока
-            "IBLOCK_ID" => $catalog_id,	// Инфоблок
-            "SECTION_ID" => "",	// ID раздела
-            "SECTION_CODE" => "",	// Код раздела
-            "SECTION_URL" => "",	// URL, ведущий на страницу с содержимым раздела
-            "COUNT_ELEMENTS" => "Y",	// Показывать количество элементов в разделе
-            "TOP_DEPTH" => "2",	// Максимальная отображаемая глубина разделов
-            "SECTION_FIELDS" => array(	// Поля разделов
-                0 => "",
-                1 => "",
-            ),
-            "SECTION_USER_FIELDS" => array(	// Свойства разделов
-                0 => "",
-                1 => "UF_TYPE",
-            ),
-            "ADD_SECTIONS_CHAIN" => "N",	// Включать раздел в цепочку навигации
-            "CACHE_TYPE" => "A",	// Тип кеширования
-            "CACHE_TIME" => "36000000",	// Время кеширования (сек.)
-            "CACHE_NOTES" => "",
-            "CACHE_GROUPS" => "N",	// Учитывать права доступа
-            "COMPONENT_TEMPLATE" => ".default",
-            "COUNT_ELEMENTS_FILTER" => "CNT_ACTIVE",	// Показывать количество
-            "FILTER_NAME" => "",	// Имя массива со значениями фильтра разделов
-            "CACHE_FILTER" => "N",	// Кешировать при установленном фильтре
-        ),
-        false
-    );?>
-<?endif;?>
+
 <?if(PRmajor::GetDisplayProp('USE_MAIN_SPECIAL') != 'N'):?>
     <?$APPLICATION->IncludeComponent("bitrix:news.list", "mainSpecial", Array(
         "DISPLAY_DATE" => "N",	// Выводить дату элемента
@@ -539,6 +506,46 @@ $APPLICATION->IncludeComponent(
 	false
 );?>
 <?endif;?>
+<?if(PRmajor::GetDisplayProp('USE_MAIN_CATEGORIES') != 'N'):?>
+<?$catalog_id = Option::get("prymery.major", "USE_MAIN_CATEGORIES",'',SITE_ID);
+	global $sectmainFilt;
+	$sectmainFilt = array('=UF_ON_MAIN'=>true);
+    $APPLICATION->IncludeComponent(
+	"bitrix:catalog.section.list", 
+	"mainType", 
+	array(
+		"VIEW_MODE" => "TEXT",
+		"SHOW_PARENT_NAME" => "Y",
+		"IBLOCK_TYPE" => "prymery_major_catalog",
+		"IBLOCK_ID" => "16",
+		"SECTION_ID" => "",
+		"SECTION_CODE" => "",
+		"SECTION_URL" => "",
+		"SECTION_TITLE" => 'Популярные категории',
+		"COUNT_ELEMENTS" => "Y",
+		//"TOP_DEPTH" => "1",
+		"SECTION_FIELDS" => array(
+			0 => "",
+			1 => "",
+		),
+		"SECTION_USER_FIELDS" => array(
+			0 => "UF_TYPE",
+			1 => "",
+		),
+		"ADD_SECTIONS_CHAIN" => "N",
+		"CACHE_TYPE" => "A",
+		"CACHE_TIME" => "36000000",
+		"CACHE_NOTES" => "",
+		"CACHE_GROUPS" => "N",
+		"COMPONENT_TEMPLATE" => "mainType",
+		"COUNT_ELEMENTS_FILTER" => "CNT_ACTIVE",
+		"FILTER_NAME" => "sectmainFilt",
+		"CACHE_FILTER" => "N"
+	),
+	false
+);?>
+<?endif;?>
+
 <?if(PRmajor::GetDisplayProp('USE_MAIN_INFO') != 'N'):?>
 <section class="section-about">
 	<div class="container">
@@ -671,7 +678,11 @@ $APPLICATION->IncludeComponent(
 				</div>
 			</div>
 			<div class="col-12 col-lg-auto">
-				<?$APPLICATION->IncludeComponent(
+			<a href="/get_catalog/" class="adp-btn adp-btn-primary">
+				Получить			
+				<svg class="icon-submit"><use xlink:href="#arrow-location"></use></svg>
+			</a>
+				<?/* $APPLICATION->IncludeComponent(
 	"bitrix:sender.subscribe", 
 	"prymery", 
 	array(
@@ -694,7 +705,7 @@ $APPLICATION->IncludeComponent(
 		"AJAX_OPTION_ADDITIONAL" => ""
 	),
 	false
-);?>
+); */?>
 			</div>
 		</div>
 	</div>

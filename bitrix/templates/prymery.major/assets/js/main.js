@@ -131,11 +131,12 @@ $(document).ready(function(){
 
 	$(".proposal-slider").slick({
 		arrows: false,
+		swipe:true,
 		swipeToSlide: true,
 		touchThreshold: 30,
 		autoplay: true,
-		autoplaySpeed:0,
-		speed: 10000,
+		//autoplaySpeed:10000,
+		speed: 1000,
 		dots: true,
 		slidesToShow: 1, // сколько слайдов сразу
 		slidesToScroll: 1, // сколько слайдов перематывать

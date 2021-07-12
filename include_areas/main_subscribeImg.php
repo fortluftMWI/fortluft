@@ -1,1 +1,1 @@
-<img src="<?=SITE_TEMPLATE_PATH?>/assets/img/subscribe/subscribe-thumb.png" alt="prymery.major">
+<img alt="fortluft catalog" src="/local/images/catalog_icon.png">

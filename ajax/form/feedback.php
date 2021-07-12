@@ -20,7 +20,6 @@ use \Bitrix\Main\Config\Option;
             "REQUEST_ARFIELDS" => array(
                 0 => "NAME",
                 1 => "PHONE",
-                2 => "MESSAGE",
             ),
             "COMPONENT_TEMPLATE" => ".default",
             "PRYMERY_MODULE_ID" => 'prymery.major',
@@ -42,6 +41,9 @@ use \Bitrix\Main\Config\Option;
         false
     ); ?>
 </div>
+	<script>
+		inputmask();
+	</script>
 <?
 if($_REQUEST['ajax']){
     require($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/include/epilog_after.php");

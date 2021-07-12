@@ -894,6 +894,7 @@ svg.icon-sm {
   -ms-flex-positive: 1;
   flex-grow: 1;
   border-right: 1px solid #ededed;
+  position:relative;
 }
 
 .user-links li:last-child {
@@ -2709,6 +2710,7 @@ svg.icon-sm {
 
 .instagram-thumb {
   position: relative;
+  display:block;
 }
 
 .instagram-thumb-inner {
@@ -3327,7 +3329,8 @@ svg.icon-sm {
 }
 
 .footer-bottom {
-  padding-top: 35px;
+  padding-top:1.5em;
+  margin-top:1.5em;
   border-top: 1px solid #e5e5e5;
 }
 
@@ -3393,9 +3396,14 @@ svg.icon-sm {
     margin-right: 20px; }
     .widget-social li:last-child {
       margin-right: 0; }
+	  .widget-navigation .widget-social li:last-child{
+		  margin-bottom:12px;
+	  }
   .widget-social img {
     width: 24px; }
-
+.widget-navigation .widget-social a{
+	border-bottom:none;
+}
 .widget-navigation li {
   margin-bottom: 12px; }
   .widget-navigation li:last-child {
@@ -7899,4 +7907,40 @@ li.pagination-current {
 }
 .success-message .action{
     margin-top: 20px;
+}
+.notice_app{
+	background: #474747;
+	color:#fff;
+    position: absolute;
+    padding: 0.5em 1em;
+    border-radius: 5px;
+    font-size: 0.9em;
+	text-align:center;
+	max-width:200px;
+	z-index:111;
+}
+.appendig_find_city{
+	display:none;    
+	position: absolute;
+    z-index: 9;
+    background: #fff;
+    top: 4em;
+	width:95%;
+}
+.appendig_find_city a{
+	display:block;
+	text-align:left;
+	border-bottom:1px dotted;
+}
+.white{
+	color:#fff;
+}
+.footer_bot_bot{
+	display:flex;align-items:center;margin-top:0.5em; padding-top:0.5em; border-top:1px solid #e5e5e5;
+}
+.footer_bot_bot a{
+	color:#9f9f9f;text-decoration:none;
+}
+.logo-socials{
+	display:flex;flex-direction:column;justify-content:space-between;height:100%;
 }
