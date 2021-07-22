@@ -7944,3 +7944,172 @@ li.pagination-current {
 .logo-socials{
 	display:flex;flex-direction:column;justify-content:space-between;height:100%;
 }
+
+/*посадочная страница*/
+
+.landing-page-block {
+  background: #fff;
+  padding: 30px;
+  margin-bottom: 30px;
+}
+
+.landing-page-block:last-of-type {
+  margin-bottom: 0;
+}
+
+.landing-page-img {
+  width: 100%;
+  height: auto;
+  margin-bottom: 22px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.landing-page-img img {
+  width: 100%;
+  height: 100%;
+  max-height: 326px;
+  min-height: 120px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.landing-page-descr {
+  font-size: 16px;
+  line-height: 26px;
+}
+
+.landing-page-descr + .landing-page-descr {
+  margin-top: 25px;
+}
+
+.landing-page-descr p:not(.landing-page-title) {
+  margin-bottom: 15px;
+}
+
+.landing-page-bottom .landing-page-descr p:not(.landing-page-title) {
+  margin-bottom: 27px;
+}
+
+.landing-page-bottom .landing-page-descr p:not(.landing-page-title):last-of-type {
+  margin-bottom: 0;
+}
+
+.landing-page-descr p:last-of-type {
+  margin-bottom: 0;
+}
+
+.landing-page-title,
+.landing-page-descr h3 {
+  font-size: 26px;
+  line-height: 42px;
+  margin-bottom: 17px;
+
+  margin-top: 22px;
+  font-weight: 400;
+}
+
+.landing-page-title:first-child,
+.landing-page-descr h3:first-child {
+  margin-top: 0;
+}
+
+.landing-page-border-text {
+  font-size: 18px;
+  line-height: 29px;
+  padding-left: 22px;
+  border-left: 2px solid #474747;
+  max-width: 570px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 44px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.landing-page-form {
+  margin-top: 44px;
+  background: #F5F5F5;
+  padding: 45px;
+}
+
+.landing-page-form-block {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+ /* justify-content: space-between;*/
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.landing-page-form-text {
+  font-size: 16px;
+  line-height: 26px;
+  max-width: 275px;
+  padding-right: 10px;
+  margin-right: auto;
+  padding-top: 4px;
+}
+
+.landing-page-form-btn a {
+  text-decoration: none;
+  color:#fff;
+}
+
+.landing-page-form-icon {
+  margin-right: 10%;
+  width: 60px;
+  height: 60px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.landing-page-form-icon img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+
+@media screen and (max-width: 1199px) {
+  .landing-page-form-icon {
+    margin-right: 15px;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .landing-page-border-text {
+      margin-left: 0;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .landing-page-form-icon {
+      display: none;
+  }
+
+  .landing-page-form-block {
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+          -ms-flex-direction: column;
+              flex-direction: column;
+  }
+
+  .landing-page-form-text {
+      max-width: 100%;
+      text-align: center;
+      margin-bottom: 32px;
+      padding: 0;
+  }
+
+  .landing-page-form {
+      padding: 33px 26px;
+  }
+}
+
+/*посадочная страница конец*/

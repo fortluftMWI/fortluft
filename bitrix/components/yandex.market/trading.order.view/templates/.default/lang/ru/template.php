@@ -10,6 +10,7 @@ $MESS['YANDEX_MARKET_T_TRADING_ORDER_VIEW_BASKET_ITEM_CIS_SUMMARY_READY'] = 'З�
 $MESS['YANDEX_MARKET_T_TRADING_ORDER_VIEW_BASKET_ITEM_CIS_COPY'] = 'Копировать из отгрузки';
 $MESS['YANDEX_MARKET_T_TRADING_ORDER_VIEW_BASKET_ITEM_CIS_REQUIRED'] = 'Коды идентификации не заполнены';
 $MESS['YANDEX_MARKET_T_TRADING_ORDER_VIEW_SHIPMENTS_TITLE'] = 'Грузовые места';
+$MESS['YANDEX_MARKET_T_TRADING_ORDER_VIEW_SHIPMENTS_DIMENSIONS_TOGGLE'] = 'Передать размеры?';
 $MESS['YANDEX_MARKET_T_TRADING_ORDER_VIEW_SHIPMENT'] = 'Отгрузка #ID#';
 $MESS['YANDEX_MARKET_T_TRADING_ORDER_VIEW_BOX_CHOOSE'] = 'Выберите место';
 $MESS['YANDEX_MARKET_T_TRADING_ORDER_VIEW_BOX_NEW'] = 'Новое место';

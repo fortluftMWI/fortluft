@@ -13,6 +13,10 @@ ErrorDocument 404 /404.php
 <IfModule mod_rewrite.c>
 	Options +FollowSymLinks
 	RewriteEngine On
+
+	RewriteCond %{HTTP_HOST} ^www\.(.*)$
+    RewriteRule ^(.*)$ https://%1/$1 [L,R=301]
+    
 	RewriteCond %{REQUEST_FILENAME} !-f
 	RewriteCond %{REQUEST_FILENAME} !-l
 	RewriteCond %{REQUEST_FILENAME} !-d
@@ -30,3 +34,20 @@ ErrorDocument 404 /404.php
 	ExpiresByType image/jpeg "access plus 3 day"
 	ExpiresByType image/gif "access plus 3 day"
 </IfModule>
+
+Redirect 301 /catalog/elektrika/datchiki_i_klapany/klapany_izmeneniya_faz_grm_1/ /catalog/sistema_gazoraspredeleniya/klapany_izmeneniya_faz_grm/
+Redirect 301 /catalog/sistema_okhlazhdeniya_i_otopleniya/alyuminievye_truby_1/ /catalog/vpusknaya_sistema/alyuminievye_truby/
+Redirect 301 /catalog/sistema_okhlazhdeniya_i_otopleniya/silikonovye_patrubki_i_shlangi_1/ /catalog/vpusknaya_sistema/silikonovye_patrubki_i_shlangi/
+Redirect 301 /catalog/sistema_okhlazhdeniya_i_otopleniya/khomuty_2/ /catalog/vpusknaya_sistema/khomuty/
+Redirect 301 /catalog/vykhlopnaya-sistema/termoizolyatsiya /catalog/vykhlopnaya_sistema/termoizolyatsiya/
+Redirect 301 /catalog/vykhlopnaya-sistema/komplektujushhie-i-rashodniki /catalog/vykhlopnaya_sistema/komplektuyushchie_i_raskhodniki/
+
+Redirect 301 /catalog/vpusknaya_sistema/silikonovye_patrubki_i_shlangi/dempfernye_patrubki_1/ /catalog/vpusknaya_sistema/silikonovye_patrubki_i_shlangi/dempfernye_patrubki/
+Redirect 301 /catalog/vpusknaya_sistema/silikonovye_patrubki_i_shlangi/pryamye_patrubki_1/ /catalog/vpusknaya_sistema/silikonovye_patrubki_i_shlangi/pryamye_patrubki/
+Redirect 301 /catalog/vpusknaya_sistema/silikonovye_patrubki_i_shlangi/shlangi_1/	/catalog/vpusknaya_sistema/silikonovye_patrubki_i_shlangi/shlangi/
+Redirect 301 /catalog/vpusknaya_sistema/silikonovye_patrubki_i_shlangi/izgiby_3/	/catalog/vpusknaya_sistema/silikonovye_patrubki_i_shlangi/izgiby_1/
+Redirect 301 /catalog/vpusknaya_sistema/silikonovye_patrubki_i_shlangi/pryamye_patrubki_perekhodniki_1/	/catalog/vpusknaya_sistema/silikonovye_patrubki_i_shlangi/pryamye_patrubki_perekhodniki/
+Redirect 301 /catalog/vpusknaya_sistema/silikonovye_patrubki_i_shlangi/izgiby_perekhodniki_1/	/catalog/vpusknaya_sistema/silikonovye_patrubki_i_shlangi/izgiby_perekhodniki/
+Redirect 301 /catalog/vpusknaya_sistema/silikonovye_patrubki_i_shlangi/t_obraznye_patrubki_1/	/catalog/vpusknaya_sistema/silikonovye_patrubki_i_shlangi/t_obraznye_patrubki/
+Redirect 301 /catalog/vpusknaya_sistema/alyuminievye_truby/pryamye_truby_2/	/catalog/vpusknaya_sistema/alyuminievye_truby/pryamye_truby/
+Redirect 301 /catalog/vpusknaya_sistema/alyuminievye_truby/izgiby_2/	/catalog/vpusknaya_sistema/alyuminievye_truby/izgiby/
