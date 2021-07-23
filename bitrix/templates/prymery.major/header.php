@@ -7,7 +7,7 @@ $bIncludedModule = (\Bitrix\Main\Loader::includeModule("prymery.major")); ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?= LANGUAGE_ID ?>" lang="<?= LANGUAGE_ID ?>">
 <head>
-	<!-- Yandex.Metrika counter -->
+<!-- Yandex.Metrika counter -->
 <script type="text/javascript" >
    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
    m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
@@ -17,6 +17,7 @@ $bIncludedModule = (\Bitrix\Main\Loader::includeModule("prymery.major")); ?>
         clickmap:true,
         trackLinks:true,
         accurateTrackBounce:true,
+        webvisor:true,
         trackHash:true,
         ecommerce:"dataLayer"
    });
@@ -53,7 +54,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="format-detection" content="telephone=no">
     <title><? $APPLICATION->ShowTitle() ?></title>
-    <link rel="icon" type="image/x-icon" href="<?=SITE_TEMPLATE_PATH?>/favicon.ico" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <?
 	if($bIncludedModule){
         PRmajor::FormCheck('FORM_CHECK','FORM_CHECK_2','FORM_CHECK_3');

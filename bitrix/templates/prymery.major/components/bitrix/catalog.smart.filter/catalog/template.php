@@ -1,7 +1,7 @@
 <?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
 $this->setFrameMode(true);
 ?>			
-<div class="filter__category">
+<div class="filter__category" style="<?=!$arResult["ITEMS"] && !$arResult["FILTER_NAME"] ? "display: none;" : ""?>">
 	<div class="bx-filter">
 		<div class="bx-filter-section">
 			<form name="<?echo $arResult["FILTER_NAME"]."_form"?>" action="<?echo $arResult["FORM_ACTION"]?>" method="get" class="smartfilter">

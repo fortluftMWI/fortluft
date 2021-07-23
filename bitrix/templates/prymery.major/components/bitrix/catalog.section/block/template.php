@@ -87,8 +87,10 @@ if(!$arParams['JS_ID_OFFERS']){$arParams['JS_ID_OFFERS'] = substr(str_shuffle('A
                                 <?unset($explode_price);
                                 if($arItem['OFFERS']){
                                     $explode_price = explode(' ',$arItem['OFFERS'][0]['MIN_PRICE']['PRINT_DISCOUNT_VALUE']);
-                                }else{
+                                }elseif($arItem['MIN_PRICE']){
                                     $explode_price = explode(' ',$arItem['MIN_PRICE']['PRINT_DISCOUNT_VALUE']);
+                                }else{
+                                    $explode_price = explode(' ',$arItem['ITEM_PRICES'][0]['PRINT_PRICE']);
                                 }
 								$old_price = $arItem['MIN_PRICE']['VALUE'];
 								 if($discount = getDiscountSum($arItem)){
@@ -104,6 +106,11 @@ if(!$arParams['JS_ID_OFFERS']){$arParams['JS_ID_OFFERS'] = substr(str_shuffle('A
                                     <div class="current"><span class="js-listPrice" data-price="<?=$explode_price[1]?>" data-val="<?=$explode_price[0]?>"><?=$arItem['OFFERS'][0]['MIN_PRICE']['PRINT_DISCOUNT_VALUE']?></span></div>
                                     <?if(($arItem['MIN_PRICE_OLD_VAT']>$arItem['MIN_PRICE_NEW_VAT'])and ($arItem['MIN_PRICE_NEW_VAT']>0)){?>
                                         <div class="old"><span class="js-listOldPrice"><?=$arItem['MIN_PRICE_OLD_PRINT_VAT']?></span></div>
+                                    <?}?>
+								<?elseif($arItem['MIN_PRICE']):?>
+                                    <div class="current"><span class="js-listPrice" data-price="<?=$explode_price[1]?>" data-val="<?=$explode_price[0]?>"><?=$arItem['MIN_PRICE']['PRINT_DISCOUNT_VALUE']?></span></div>
+                                   <?if(($old_price > $explode_price[0]) and ($explode_price[0]>0)){?>
+                                        <div class="old"><span class="js-listOldPrice" data-val="<?=$old_price?>"><?=$old_price?> <?=$explode_price[1]?></span></div>
                                     <?}?>
                                 <?else:?>
                                     <div class="current"><span class="js-listPrice" data-price="<?=$explode_price[1]?>" data-val="<?=$explode_price[0]?>"><?=$explode_price[0]?> <?=$explode_price[1]?></span></div>
