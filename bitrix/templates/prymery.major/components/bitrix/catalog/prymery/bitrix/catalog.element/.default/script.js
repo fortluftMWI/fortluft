@@ -22,6 +22,7 @@ $(document).ready(function(){
     $('.product-item__quantity .quantity:not(.disabled-quantity) .quantity-update').on('click',function(){
        var val = $(this).parent().find('.js-quantity-aviable').val();
         $('.js-price').html(Math.round((val*$('.js-price').attr('data-val'))*100)/100+' '+$('.js-price').data('price'));
+		$(this).closest('.product-item').find('.js-oldPrice').html(Math.round((val* $(this).closest('.product-item').find('.js-oldPrice').attr('data-val'))*100)/100+' '+ $(this).closest('.product-item').find('.js-oldPrice').text().split(' ')[1]);
     });
     $('.to_basket_detail').on('click', function () {
         var id = $(this).attr('data-id');

@@ -625,7 +625,7 @@ $APPLICATION->IncludeComponent(
 <?if(PRmajor::GetDisplayProp('USE_MAIN_SUBSCRIBE') != 'N'):?>
 <section class="section-subscribe">
 	<div class="container">
-		<div class="row align-items-center">
+		<div class="row align-items-center" style="padding:1em;">
 			<div class="col-12 col-lg">
 				<div class="subscribe-item">
 					<div class="subscribe-thumb">
@@ -677,7 +677,7 @@ $APPLICATION->IncludeComponent(
 					</div>
 				</div>
 			</div>
-			<div class="col-12 col-lg-auto">
+			<div class="col-12 col-lg-auto get_catalog_div">
 			<a href="/get_catalog/" class="adp-btn adp-btn-primary">
 				Получить			
 				<svg class="icon-submit"><use xlink:href="#arrow-location"></use></svg>

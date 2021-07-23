@@ -47,8 +47,8 @@ if ($isFilter) {
             <div class="row">
                 <div class="col-12 col-lg-3">
                     <div class="product-filter">
-                        <? global $USER;
-                        if ($USER->IsAdmin()){?>
+                        <? /* global $USER;
+                        if ($USER->IsAdmin()){ */?>
                             <div class="container page_simple" style="padding: 0; border-radius: 0">
                                 <?$APPLICATION->IncludeComponent(
                                     "finnit:finnit.filter",
@@ -59,7 +59,7 @@ if ($isFilter) {
                                     )
                                 );?>
                             </div>
-                        <?}?>
+                        <?//}?>
 
                         <? if ($isFilter): ?>
                             <? $APPLICATION->IncludeComponent(
@@ -378,39 +378,28 @@ if ($isFilter) {
             </div>
         </div>
     </section>
-    <section class="section-popular-product">
-        <div class="container">
-            <div class="section-heading">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="section-title text-center">
-                            <?$APPLICATION->IncludeComponent(
-                                "bitrix:main.include",
-                                ".default",
-                                array(
-                                    "AREA_FILE_SHOW" => "file",
-                                    "AREA_FILE_SUFFIX" => "inc",
-                                    "AREA_FILE_RECURSIVE" => "Y",
-                                    "EDIT_TEMPLATE" => "",
-                                    "COMPONENT_TEMPLATE" => ".default",
-                                    "PATH" => SITE_DIR."include_areas/catalog_special_title.php"
-                                ),
-                                false
-                            );?>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12">
-                    <?
+   
+                    <?//Спец.Предложения
+					$rsParentSection = CIBlockSection::GetByID($arResult['VARIABLES']['SECTION_ID']);
+					if ($arParentSection = $rsParentSection->GetNext())
+					{
+					   $arFilter = array('IBLOCK_ID' => $arParams['IBLOCK_ID'],'>LEFT_MARGIN' => $arParentSection['LEFT_MARGIN'],'<RIGHT_MARGIN' => $arParentSection['RIGHT_MARGIN'],'>DEPTH_LEVEL' => $arParentSection['DEPTH_LEVEL'], 'ACTIVE'=>'Y'); 
+					   $rsSect = CIBlockSection::GetList(array('left_margin' => 'asc'),$arFilter);
+					   while ($arSect = $rsSect->GetNext())
+					   {
+						   $nav_sections[]= $arSect['ID'];
+					   }
+					}
+
                     $catalog_id = Option::get("prymery.major", "CATALOG_IBLOCK",'',SITE_ID);
                     $price_id = Option::get("prymery.major", "CATALOG_PRICE",'',SITE_ID);
                     if(!$catalog_id){$catalog_id = PRmajor::CIBlock_Id("prymery_major_catalog","prymery_major_catalog");}
                     if(!$price_id){$price_id = 'BASE';}
+					global $specialFilter;
+					$specialFilter = array('PROPERTY_SPECIAL_VALUE'=>'да','SECTION_ID'=>$nav_sections);
                     $APPLICATION->IncludeComponent(
                         "bitrix:catalog.section",
-                        "recommendSlider",
+                        "recommendSliderCats",
                         array(
                             "CUSTOM_COL" => "favorites",
                             "ELEMENT_SORT_FIELD" => $sort,
@@ -449,7 +438,7 @@ if ($isFilter) {
                             "ELEMENT_SORT_ORDER2" => "desc",
                             "ENLARGE_PRODUCT" => "PROP",
                             "ENLARGE_PROP" => "-",
-                            "FILTER_NAME" => "arrFilter",
+                            "FILTER_NAME" => "specialFilter",
                             "HIDE_NOT_AVAILABLE" => "N",
                             "HIDE_NOT_AVAILABLE_OFFERS" => "N",
                             "IBLOCK_ID" => $catalog_id,
@@ -560,12 +549,7 @@ if ($isFilter) {
                             "DISPLAY_COMPARE" => "N"
                         ),
                         false
-                    );
-                    ?>
-                </div>
-            </div>
-        </div>
-    </section>
+                    );?>
 <?
 $arFilter = Array('IBLOCK_ID'=>$arParams['IBLOCK_ID'], 'GLOBAL_ACTIVE'=>'Y', 'ID'=>$intSectionID);
 $db_list = CIBlockSection::GetList(Array(), $arFilter, false,array('UF_*','NAME','DESCRIPTION','ID'));

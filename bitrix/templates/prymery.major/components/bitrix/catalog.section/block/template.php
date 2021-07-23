@@ -5,7 +5,7 @@ if(!$arParams['JS_ID_OFFERS']){$arParams['JS_ID_OFFERS'] = substr(str_shuffle('A
 ?>									
 <?if($arResult['ITEMS']):?>
 	<div class="product__list">
-		<div class="row">
+		<div class="row navigation_ajax_container">
 			<?foreach($arResult['ITEMS'] as $arItem):?>
 				<?
 				$this->AddEditAction($arItem['ID'], $arItem['EDIT_LINK'], CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_EDIT"));
@@ -15,7 +15,7 @@ if(!$arParams['JS_ID_OFFERS']){$arParams['JS_ID_OFFERS'] = substr(str_shuffle('A
 				}else{
 					$favorite_id = $arItem['ID'];
 				}?>
-				<div class="<?if($arParams['CLASS_ROW_CUSTOM']):?><?=$arParams['CLASS_ROW_CUSTOM']?><?else:?>col-12 col-md-6 col-xl-4<?endif;?>">
+				<div class="<?if($arParams['CLASS_ROW_CUSTOM']):?><?=$arParams['CLASS_ROW_CUSTOM']?><?else:?>ajax_element col-12 col-md-6 col-xl-4<?endif;?>">
                     <div class="product<?if($arItem['OFFERS']):?> productOffers<?endif;?>" id="<?=$this->GetEditAreaId($arItem['ID']);?>" data-parent-id="<?=$arParams['JS_ID_OFFERS']?>" data-element="<?=$arItem['ID']?>">
                         <div class="thumb">
                             <div class="labels">
@@ -27,6 +27,7 @@ if(!$arParams['JS_ID_OFFERS']){$arParams['JS_ID_OFFERS'] = substr(str_shuffle('A
                                 <a href="<?=$arItem['DETAIL_PAGE_URL']?>" class="thumb-link"><img src="<?=$arItem['PREVIEW_PICTURE']['SRC']?>" alt="<?=$arItem['NAME']?>"></a>
                             <?endif;?>
                             <?if($arItem['PROPERTIES']['STICKER_HIT']['VALUE']):?><div class="label label--hit"><?=GetMessage('CATALOG_HIT');?></div><?endif;?>
+							<a data-fancybox data-type="ajax" data-src="/local/ajax/fast_view.php?element_id=<?=$arItem['ID']?>" class="fast_view_btn" href="javascript:void(0)"><?=GetMessage('FAST_VIEW');?></a>
                         </div>
                         <div class="content">
                             <a class="title" href="<?=$arItem['DETAIL_PAGE_URL']?>"><?=$arItem['NAME']?></a>
@@ -88,16 +89,26 @@ if(!$arParams['JS_ID_OFFERS']){$arParams['JS_ID_OFFERS'] = substr(str_shuffle('A
                                     $explode_price = explode(' ',$arItem['OFFERS'][0]['MIN_PRICE']['PRINT_DISCOUNT_VALUE']);
                                 }else{
                                     $explode_price = explode(' ',$arItem['MIN_PRICE']['PRINT_DISCOUNT_VALUE']);
-                                }?>
+                                }
+								$old_price = $arItem['MIN_PRICE']['VALUE'];
+								 if($discount = getDiscountSum($arItem)){
+									$old_price = $arItem['MIN_PRICE']['DISCOUNT_VALUE'];
+									if($discount['type'] == 'P'){
+										$explode_price[0] = ceil(($explode_price[0] - $explode_price[0]/100*$discount['value'])/5)*5;
+									} else {
+										$explode_price[0] = $explode_price[0] - $discount['value'];
+									}
+								} ?>
+                            
                                 <?if($arItem['OFFERS']):?>
                                     <div class="current"><span class="js-listPrice" data-price="<?=$explode_price[1]?>" data-val="<?=$explode_price[0]?>"><?=$arItem['OFFERS'][0]['MIN_PRICE']['PRINT_DISCOUNT_VALUE']?></span></div>
                                     <?if(($arItem['MIN_PRICE_OLD_VAT']>$arItem['MIN_PRICE_NEW_VAT'])and ($arItem['MIN_PRICE_NEW_VAT']>0)){?>
                                         <div class="old"><span class="js-listOldPrice"><?=$arItem['MIN_PRICE_OLD_PRINT_VAT']?></span></div>
                                     <?}?>
                                 <?else:?>
-                                    <div class="current"><span class="js-listPrice" data-price="<?=$explode_price[1]?>" data-val="<?=$explode_price[0]?>"><?=$arItem['MIN_PRICE']['PRINT_DISCOUNT_VALUE']?></span></div>
-                                    <?if(($arItem['MIN_PRICE']['VALUE']>$arItem['MIN_PRICE']['DISCOUNT_VALUE'])and ($arItem['MIN_PRICE']['DISCOUNT_VALUE']>0)){?>
-                                        <div class="old"><span class="js-listOldPrice"><?=$arItem['MIN_PRICE']['PRINT_VALUE']?></span></div>
+                                    <div class="current"><span class="js-listPrice" data-price="<?=$explode_price[1]?>" data-val="<?=$explode_price[0]?>"><?=$explode_price[0]?> <?=$explode_price[1]?></span></div>
+                                    <?if(($old_price > $explode_price[0]) and ($explode_price[0]>0)){?>
+                                        <div class="old"><span class="js-listOldPrice" data-val="<?=$old_price?>"><?=$old_price?> <?=$explode_price[1]?></span></div>
                                     <?}?>
                                 <?endif;?>
                             </div>

@@ -114,7 +114,23 @@ if ($arParams["SET_TITLE"] == "Y")
         }
         ?>
     </div>
-
+	<pre>
+	<?$order = \Bitrix\Sale\Order::load($arResult['ORDER']['ID']);
+	$propertyCollection = $order->getPropertyCollection();
+	 $emailPropValue = $propertyCollection->getUserEmail()->getValue();
+	 $namePropValue  = $propertyCollection->getPayerName()->getValue();
+	 $phonePropValue = $propertyCollection->getPhone()->getValue();
+	 $desc = $order->getField('USER_DESCRIPTION');?>
+	<script>
+	$(document).ready(function(){
+				Comagic.addOfflineRequest({
+				  name: '<?=$namePropValue?>',
+				  email: '<?=$emailPropValue?>',
+				  phone: '<?=$phonePropValue?>',
+				  message: '<?=$desc?>',
+				});
+		});
+	</script>
 <? else: ?>
 
     <b><?=Loc::getMessage("SOA_ERROR_ORDER")?></b>

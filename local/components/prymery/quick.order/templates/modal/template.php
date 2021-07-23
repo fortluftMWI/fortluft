@@ -13,7 +13,7 @@
                 <input type="<?= ($field == "EMAIL" ? "email" : ($field == "PHONE" ? "tel" : "text")); ?>"
                        placeholder="<?= GetMessage('CAPTION_' . $field) ?><? if (in_array($field, $arParams['REQUIRED'])): ?>*<? endif; ?>"
                        name="QUICK_FORM[<?= $field ?>]" value="<?= $value ?>"
-                       class="inputtext form-control" id="quick_order_form_<?= $field ?>"/>
+                       class="inputtext form-control<? if (in_array($field, $arParams['REQUIRED'])): ?> required<? endif; ?>"" id="quick_order_form_<?= $field ?>"/>
             </div>
         <? endforeach; ?>
         <div class="form-group">

@@ -27,4 +27,7 @@
             false
         );?>
     </div>
+	<script>
+		inputmask();
+	</script>
 <?endif;?>

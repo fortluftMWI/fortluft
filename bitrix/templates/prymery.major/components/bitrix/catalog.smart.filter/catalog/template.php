@@ -9,7 +9,7 @@ $this->setFrameMode(true);
 				<input type="hidden" name="<?echo $arItem["CONTROL_NAME"]?>" id="<?echo $arItem["CONTROL_ID"]?>" value="<?echo $arItem["HTML_VALUE"]?>" />
 				<?endforeach;?>
 				<div class="filter_block">
-					<?foreach($arResult["ITEMS"] as $key=>$arItem){
+					<?/* foreach($arResult["ITEMS"] as $key=>$arItem){
 						$key = $arItem["ENCODED_ID"];
 						if(isset($arItem["PRICE"])):
 							if ($arItem["VALUES"]["MAX"]["VALUE"] - $arItem["VALUES"]["MIN"]["VALUE"] <= 0)
@@ -109,7 +109,7 @@ $this->setFrameMode(true);
 								</script>
 							</div>
 						<?endif;
-					}
+					} */
 					foreach($arResult["ITEMS"] as $key=>$arItem){
 						if($arItem['CODE'] == 'visota'){continue;}
 						if(empty($arItem["VALUES"])|| isset($arItem["PRICE"]))
@@ -118,7 +118,7 @@ $this->setFrameMode(true);
 						if ($arItem["DISPLAY_TYPE"] == "A"&& ($arItem["VALUES"]["MAX"]["VALUE"] - $arItem["VALUES"]["MIN"]["VALUE"] <= 0))
 							continue;
 						?>
-						<div class="fiter__control deployed" data-role="bx_filter_block">
+						<div class="fiter__control" data-role="bx_filter_block">
 							<span class="bx-filter-container-modef"></span>
 							<div class="filter__title bx-filter-parameters-box-title"><?=$arItem["NAME"]?> <svg class="filter__icon"><use xlink:href="#angle-down"></use></svg></div>
 							<?
@@ -142,7 +142,7 @@ $this->setFrameMode(true);
 									break;
 								default://CHECKBOXES
 									$count_val = 0;?>
-								<div class="filter__item" style="display: block">
+								<div class="filter__item">
 									<?foreach($arItem["VALUES"] as $val => $ar):$count_val++;?>
 										<div class="filter__group">
 											<label data-role="label_<?=$ar["CONTROL_ID"]?>" for="<? echo $ar["CONTROL_ID"] ?>" class="custom-checkbox checkbox--info-square">

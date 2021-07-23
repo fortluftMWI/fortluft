@@ -1,5 +1,7 @@
 <? if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) die();
 use \Bitrix\Main\Config\Option;
+
+
 $article_code = Option::get("prymery.major", "CATALOG_ARTICLE",'',SITE_ID);
 $article_change = Option::get("prymery.major", "CATALOG_CHANGE_ARTICLE",'',SITE_ID);
 $arResult['ARTICLE_CODE'] = $article_code;
@@ -10,7 +12,6 @@ foreach ($arResult['ITEMS'] as $key=>$arItem){
         $Resize = CFile::ResizeImageGet($arItem['PREVIEW_PICTURE'], array('width'=>250, 'height'=>250), BX_RESIZE_IMAGE_PROPORTIONAL, true);
         $arResult['ITEMS'][$key]['PREVIEW_PICTURE']['SRC'] = $Resize['src'];
     }
-
     $arResult['ITEMS'][$key]['ALL_OFFERS_QUANTITY'] = 0;
     if($arItem['OFFERS']){
         foreach ($arItem['OFFERS'] as $offer){
@@ -85,4 +86,6 @@ foreach ($arResult['ITEMS'] as $key=>$arItem){
         $arResult['NEW_OFFERS'][$arItem['ID']] = $newOffer;
     }
 }
+
+//$arResult['DISCOUNT'] = getDiscountSum();
 $arResult['PREVIEW_PROPS'] = explode(',',str_replace(' ','',PRmajor::GetDisplayProp('CATALOG_LIST_PROP')));

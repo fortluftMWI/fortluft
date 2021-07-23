@@ -1,4 +1,5 @@
 <?
+
 //Обработчик остатков после загрузки из 1С
 AddEventHandler('catalog', 'OnSuccessCatalogImport1C', 'customCatalogImport');
 function customCatalogImport()
@@ -92,4 +93,47 @@ class DecoParams
             define("IS_MOBILE", false);
     }
 }*/
+
+function getDiscountSum(){ // получаем накопительную скидку пользователя
+	global $USER; 
+	global $DB;
+	CModule::IncludeModule("sale");
+	$res = Bitrix\Sale\Internals\DiscountTable::getById(4)->fetchAll();
+	$sale_data = $res[0]['ACTIONS_LIST']['CHILDREN'][0]['DATA'];
+	$period = $sale_data['sum_period_data']['discount_sum_period_type']; 
+	switch ($period) {
+		case 'D':
+		  $period = 'days';
+		  break;
+		case 'M':
+		  $period = 'month';
+		  break;
+		case 'Y':
+		  $period = 'year';
+		  break;
+	  }
+	$period_val = $sale_data['sum_period_data']['discount_sum_period_value']; 
+	$full_span_period = '-'.$period_val.' '.$period;
+
+
+	$arFilter = Array(
+	   "USER_ID" => $USER->GetID(),
+	   'PAYED'=>'Y',
+	   ">=DATE_INSERT" => date($DB->DateFormatToPHP(CSite::GetDateFormat("SHORT")), strtotime(date('c') . $full_span_period))
+	   );
+
+	$db_sales = CSaleOrder::GetList(array("DATE_INSERT" => "ASC"), $arFilter);
+	while ($ar_sales = $db_sales->Fetch())
+	{
+	   $period_sum +=$ar_sales['PRICE'];
+	}
+
+	foreach($sale_data['ranges'] as $k=>$val){
+		if($period_sum>=$val['sum'] && $period_sum<$sale_data['ranges'][$k+1]){
+			$sale_value_array = $val;
+		}
+	}
+
+	return $sale_value_array;
+}
 ?>

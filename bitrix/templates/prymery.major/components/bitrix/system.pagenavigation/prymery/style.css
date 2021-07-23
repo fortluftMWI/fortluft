@@ -1,0 +1,8 @@
+.more_container{
+	text-align:center;
+	margin-bottom:40px;
+}
+.more_container a{
+    font-size: 0.9em;
+    padding: 1em 2em;
+}

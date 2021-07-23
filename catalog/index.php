@@ -47,7 +47,7 @@ $APPLICATION->IncludeComponent(
 		"AJAX_OPTION_HISTORY" => "N",
 		"AJAX_OPTION_ADDITIONAL" => "",
 		"CACHE_TYPE" => "A",
-		"CACHE_TIME" => "360000",
+		"CACHE_TIME" => "0",
 		"CACHE_FILTER" => "N",
 		"CACHE_GROUPS" => "N",
 		"USE_MAIN_ELEMENT_SECTION" => "N",

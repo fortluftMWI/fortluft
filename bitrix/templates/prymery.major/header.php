@@ -21,6 +21,15 @@ $bIncludedModule = (\Bitrix\Main\Loader::includeModule("prymery.major")); ?>
         ecommerce:"dataLayer"
    });
 </script>
+
+<!--comagic-->
+<script type="text/javascript">
+	var __cs = __cs || [];
+	__cs.push(["setCsAccount", "bID9Rgh1eGPr0N0xfbgvb2ec5Ubho1mS"]);
+</script>
+<script type="text/javascript" async src="https://app.uiscom.ru/static/cs.min.js"></script>
+
+
 <noscript><div><img src="https://mc.yandex.ru/watch/29142655" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 <!-- /Yandex.Metrika counter -->
 <!-- Global site tag (gtag.js) - Google Analytics -->

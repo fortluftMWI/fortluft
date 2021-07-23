@@ -6,9 +6,9 @@
             <?if ($previousLevel && $arItem["DEPTH_LEVEL"] < $previousLevel):?><?=str_repeat("</div></div>", ($previousLevel - $arItem["DEPTH_LEVEL"]));?><?endif?>
             <?if ($arItem["IS_PARENT"]):?>
                 <?if ($arItem["DEPTH_LEVEL"] == 1):?>
-					<div class="fiter__control deployed">
+					<div class="fiter__control">
 						<div class="filter__title"><a href="<?=$arItem["LINK"]?>"><?=$arItem["TEXT"]?></a> <svg class="filter__icon"><use xlink:href="#angle-down"></use></svg></div>
-						<div class="filter__item" style="display: block">
+						<div class="filter__item" style="display: none">
                 <?else:?>
 					<label class="custom-checkbox checkbox--info"><a href="<?=$arItem["LINK"]?>" class="checkbox-text"><?=$arItem["TEXT"]?></a></label>
                 <?endif?>

@@ -170,7 +170,7 @@ $(document).ready(function(){
 	});
 
 	/*filter toggle*/
-	$(".filter__title").on("click", function(){
+	$("body").on("click", ".filter__title", function(){
 		$(this).next().slideToggle().parent().toggleClass("deployed");
 	});
 	$(".dropdown-link__header").on("click", function(){
@@ -287,6 +287,15 @@ $(document).ready(function(){
 		});
 
 	}, false);
+	
+	if(window.innerWidth>767){
+		$('body').on('mouseenter', '.product', function(){
+				$(this).find('.fast_view_btn').show();
+			});
+			$('body').on('mouseleave', '.product', function(){
+				$(this).find('.fast_view_btn').hide();
+			});
+	}
 });
 
 
@@ -356,9 +365,10 @@ BX.addCustomEvent('onAjaxSuccess', function(){
 	});
 
 	/*filter toggle*/
-	$(".filter__title").on("click", function(){
+	/* $(".filter__title").on("click", function(){
+		console.log($(this));
 		$(this).next().slideToggle().parent().toggleClass("deployed");
-	});
+	}); */
 	$(".dropdown-link__header").on("click", function(){
 		$(this).toggleClass("open").next().slideToggle();
 	});

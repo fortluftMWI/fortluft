@@ -94,7 +94,7 @@
 <footer class="main-footer">
 	<div class="container">
 		<div class="row justify-content-center">
-			<div class="col-6 col-sm-4 col-md-4 col-lg">
+			<div class="col-4 col-sm-4 col-md-4 col-lg">
 			
 			<div class="widget widget-navigation">
 					<h3>
@@ -129,7 +129,7 @@
 				
 				
 			</div>
-			<div class="col-6 col-md-4 col-lg">
+			<div class="col-4 col-md-4 col-lg">
 			<div class="widget widget-navigation">
 					<h3>
                         <?$APPLICATION->IncludeComponent(
@@ -162,7 +162,7 @@
 				</div>
 				
 			</div>
-			<div class="col-6 col-sm-4 col-md-4 col-lg">
+			<div class="col-4 col-sm-4 col-md-4 col-lg">
 			<div class="widget widget-navigation">
 					<h3>
                         <?$APPLICATION->IncludeComponent(
@@ -194,7 +194,7 @@
                     );?>
 				</div>
 			</div>
-			<div class="col-12 col-sm-6 col-md-4 col-lg-3">
+			<div class="col-6 col-sm-6 col-md-4 col-lg-3">
 				<section class="widget widget-contacts">
 					<h3>
                         <?$APPLICATION->IncludeComponent(

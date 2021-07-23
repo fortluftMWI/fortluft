@@ -8,6 +8,7 @@ $MESS["CATALOG_ENOUGH"] = "Достаточно";
 $MESS["CATALOG_FEW"] = "Мало";
 $MESS["CATALOG_NOT_AVAIABLE"] = "Нет в наличии";
 $MESS["CATALOG_DETAIL_LINK"] = "Посмотреть";
+$MESS["FAST_VIEW"] = "Быстрый просмотр";
 $MESS["POPUP_TITLE"] = "Товар добавлен в корзину";
 $MESS["POPUP_BASKET_BTN"] = "Перейти в корзину";
 $MESS["POPUP_CONTINIE_BTN"] = "Продолжить покупки";

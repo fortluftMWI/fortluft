@@ -1,6 +1,8 @@
 <? if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) die();
 $this->setFrameMode(true);
 use \Bitrix\Main\Localization\Loc;
+
+
 ?>
 <div class="product-item noBottomRadius">
 	<div class="row">
@@ -13,16 +15,19 @@ use \Bitrix\Main\Localization\Loc;
 					<div class="label label-hit"><?=GetMessage('CATALOG_HIT');?></div>
 				<?endif;?>
 			</div>
+			<?if($arResult['DISCOUNT']['type'] == 'P' && $arResult['DISCOUNT']['value']){?>
+				<span class="discount_label">-<?=$arResult['DISCOUNT']['value']?>%</span>
+			<?}?>
             <div class="product-item__thumb">
                 <a href="javascript:void(0)" class="add-favorites to_favorites custom-favorites" data-id="<?=$arResult['ID']?>"><svg><use xlink:href="#star"></use></svg></a>
                 <div class="slider-container">
 					<div class="product-item__slider">
 						<? if ($arResult['DETAIL_PICTURE']['RESIZE']['BIG']['src']): ?>
-							<div class="slide"><img src="<?= $arResult['DETAIL_PICTURE']['RESIZE']['BIG']['src'] ?>" alt="<?= $arResult['NAME'] ?>"></div>
+							<div class="slide"><a href="<?=$arResult['DETAIL_PICTURE']['SRC']?>" data-fancybox="gallery"><img src="<?= $arResult['DETAIL_PICTURE']['RESIZE']['BIG']['src'] ?>" alt="<?= $arResult['NAME'] ?>"></a></div>
 						<? endif; ?>
 						<? if ($arResult['PHOTOS']): ?>
 							<? foreach ($arResult['PHOTOS'] as $photo): ?>
-								<div class="slide"><img src="<?= $photo['BIG']['src'] ?>" alt="<?= $photo['DESCRIPTION'] ?>"></div>
+								<div class="slide"><a href="<?=$photo['BIG']['src']?>" data-fancybox="gallery"> <img src="<?= $photo['BIG']['src'] ?>" alt="<?= $photo['DESCRIPTION'] ?>"></a></div>
 							<? endforeach; ?>
 						<? endif; ?>
 					</div>
@@ -151,12 +156,21 @@ use \Bitrix\Main\Localization\Loc;
                                 $explode_price = explode(' ',$arResult['OFFERS'][0]['MIN_PRICE']['PRINT_DISCOUNT_VALUE']);
                             }else{
                                 $explode_price = explode(' ',$arResult['MIN_PRICE']['PRINT_DISCOUNT_VALUE']);
-                            }?>
+                            }
+                            $old_price = $arResult['MIN_PRICE']['VALUE'];
+							if($arResult['DISCOUNT']){
+								$old_price = $arResult['MIN_PRICE']['DISCOUNT_VALUE'];
+								if($arResult['DISCOUNT']['type'] == 'P'){
+									$explode_price[0] = ceil(($explode_price[0] - $explode_price[0]/100*$arResult['DISCOUNT']['value'])/5)*5;
+								} else {
+									$explode_price[0] = $explode_price[0] - $arResult['DISCOUNT']['value'];
+								}
+							}?>
                             =
                             <div class="product-item__priceGroup">
                                 <span class="js-price" data-val="<?=$explode_price[0]?>" data-price="<?=$explode_price[1]?>"><?=$explode_price[0];?> <?=$explode_price[1]?></span>
-                                <?if($arResult['MIN_PRICE']['VALUE'] > $arResult['MIN_PRICE']['DISCOUNT_VALUE']):?>
-                                    <span class="old-price js-oldPrice"><?=$arResult['MIN_PRICE']['PRINT_VALUE']?></span>
+                                <?if($old_price > $explode_price[0]):?>
+                                    <span class="old-price js-oldPrice" data-val="<?=$old_price?>"><?=$old_price?> <?=$explode_price[1]?></span>
                                 <?endif;?>
                             </div>
 						</div>

@@ -2,6 +2,7 @@
 	width: 100%;
 	margin-bottom: 20px;
 }
+.filter__item{display:none;}
 .bx-filter .bx-filter-section {
 	position: relative;
 }

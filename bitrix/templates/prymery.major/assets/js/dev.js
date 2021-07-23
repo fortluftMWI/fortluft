@@ -108,7 +108,13 @@ $(document).ready(function(){
         var error = 0;
         $(this).find('input').each(function () {
             $(this).removeClass('novalid');
-            if($(this).val()==''){error = 1;$(this).addClass('novalid');}
+			if($(this).attr('type')=='tel' && $(this).val().length<17){
+				$(this).addClass('novalid');
+                error = 1;
+			} else if($(this).val()==''){
+				error = 1;
+				$(this).addClass('novalid');
+			}
         })
         if(error == 0){
             var url = $(this).attr('action');

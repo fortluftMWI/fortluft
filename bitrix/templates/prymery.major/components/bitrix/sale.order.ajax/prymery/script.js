@@ -442,3 +442,4 @@ BX.saleOrderAjax = { // bad solution, actually, a singleton at the page
 		});
 	}
 };
+

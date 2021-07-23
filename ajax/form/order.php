@@ -24,6 +24,7 @@ use \Bitrix\Main\Config\Option;
                 1 => "PHONE",
                 2 => "VIN",
                 3 => "DETAL",
+                4 => "MESSAGE",
             ),
             "COMPONENT_TEMPLATE" => ".default",
             "PRYMERY_MODULE_ID" => 'prymery.major',
@@ -31,6 +32,7 @@ use \Bitrix\Main\Config\Option;
             /*"EMAIL_TO" => Option::get("prymery.major", "EMAIL_DEF_NOTIFICATION",'',SITE_ID),*/
 			"SUCCESS_MESSAGE_TITLE" => "Сообщение отправлено",
             "SUCCESS_MESSAGE" => "Мы перезвоним вам в течение 15 минут",
+			"MAIL_THEME" => 'На сайте заполнена форма обратной связи «Помощь в подборе»',
             "GOAL_METRIKA" => "",
             "GOAL_ANALITICS" => "",
             "USE_CAPTCHA" => "N",
@@ -45,6 +47,9 @@ use \Bitrix\Main\Config\Option;
         false
     ); ?>
 </div>
+	<script>
+		inputmask();
+	</script>
 <?
 if($_REQUEST['ajax']){
     require($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/include/epilog_after.php");

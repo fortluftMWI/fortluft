@@ -27,6 +27,7 @@ use \Bitrix\Main\Config\Option;
             /*"EMAIL_TO" => Option::get("prymery.major", "EMAIL_DEF_NOTIFICATION",'',SITE_ID),*/
 			"SUCCESS_MESSAGE_TITLE" => "Сообщение отправлено",
             "SUCCESS_MESSAGE" => "Мы перезвоним вам в течение 15 минут",
+			"MAIL_THEME" => 'На сайте заполнена форма обратной связи «Обрантый звонок»',
             "GOAL_METRIKA" => "",
             "GOAL_ANALITICS" => "",
             "USE_CAPTCHA" => "N",
