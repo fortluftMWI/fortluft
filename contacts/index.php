@@ -21,39 +21,7 @@ $APPLICATION->SetTitle("Контакты");
         </div>
     </div>
 
-    <div class="main-callback">
-        <div class="container">
-            <?$APPLICATION->IncludeComponent(
-                "prymery:feedback.form",
-                "contacts",
-                array(
-                    "ARFIELDS" => array(
-                        0 => "NAME",
-                        1 => "PHONE",
-                        2 => "MESSAGE",
-                    ),
-                    "REQUEST_ARFIELDS" => array(
-                        0 => "NAME",
-                        1 => "PHONE",
-                        2 => "",
-                    ),
-                    "COMPONENT_TEMPLATE" => ".default",
-                    "PRYMERY_MODULE_ID" => 'prymery.genesis',
-                    "EMAIL_TO" => "info@fortluft.ru",
-                    "SUCCESS_MESSAGE" => "Ваше сообщение отправлено!",
-                    "GOAL_METRIKA" => "",
-                    "GOAL_ANALITICS" => "",
-                    "USE_CAPTCHA" => "N",
-                    "SAVE" => "Y",
-                    "BUTTON" => "Отправить",
-                    "TITLE" => "Остались вопросы?",
-                    "SUBTITLE" => "Свяжитесь с нами, используя форму, и мы перезвоним Вам в ближайшее время.",
-                    "PERSONAL_DATA" => "Y",
-                    "PERSONAL_DATA_PAGE" => "/policy/",
-                ),
-                false
-            ); ?>
-        </div>
+        
     </div>
 </section>
 

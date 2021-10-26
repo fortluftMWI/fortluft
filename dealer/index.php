@@ -96,6 +96,7 @@ $APPLICATION->SetTitle("Сотрудничество");
                         9 => "SITE",
                     ),
                     "COMPONENT_TEMPLATE" => ".default",
+					"MAIL_THEME" => 'На сайте заполнена форма обратной связи «Сотрудничество»',
                     "PRYMERY_MODULE_ID" => 'prymery.major',
                     "EMAIL_TO" => "info@fortluft.ru",
                     /*"EMAIL_TO" => Option::get("prymery.major", "EMAIL_DEF_NOTIFICATION",'',SITE_ID),*/

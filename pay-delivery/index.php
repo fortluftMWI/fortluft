@@ -1,5 +1,5 @@
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
-//$APPLICATION->SetTitle("Оплата и доставка");?><style>
+$APPLICATION->SetTitle("Оплата и доставка");?><style>
         *,
         *::before,
         *::after {
@@ -103,7 +103,6 @@
 
 
     </style>
-<h2 style="text-align: center; margin-top: 0; margin-bottom: 30px;">Оплата и доставка</h2>
 <div class="tabs">
  <input type="radio" name="tab-btn" id="tab-btn-1" value="" checked=""> <label for="tab-btn-1">ОПЛАТА</label> <input type="radio" name="tab-btn" id="tab-btn-2" value=""> <label for="tab-btn-2">ДОСТАВКА</label>
 	<div id="content-1">

@@ -6,13 +6,6 @@ $aMenuLinks = Array(
 		Array(), 
 		Array(), 
 		"" 
-	),
-	Array(
-		"Сотрудничество", 
-		"/dealer/", 
-		Array(), 
-		Array(), 
-		"" 
 	)
 );
 ?>

@@ -7,3 +7,6 @@
 .page-header {
     padding: 15px 0;
 }
+.slide a {
+	z-index:9;
+}

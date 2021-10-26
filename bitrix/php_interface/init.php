@@ -136,4 +136,67 @@ function getDiscountSum(){ // получаем накопительную ски
 
 	return $sale_value_array;
 }
-?>
+
+AddEventHandler("main", "OnBuildGlobalMenu", "OnBuildGlobalMenu");
+function OnBuildGlobalMenu(&$aGlobalMenu, &$aModuleMenu)
+{
+    global $USER;
+    if(!$USER->IsAdmin())
+        return;
+        
+    $aMenu = array(
+        "parent_menu" => "global_menu_content",
+        "section" => "cross",
+        "sort" => 1800,
+        "text" => "Обновление кросс номеров",
+        "title" => "Обновление кросс номеров",
+        "url" => "cross_index.php",
+        "icon" => "clouds_menu_icon",
+        "page_icon" => "clouds_page_icon",
+        "items_id" => "menu_cross",
+        "more_url" => array(
+            "clouds_index.php",
+        ),
+        "items" => array(
+            array(
+                "text" => "Настройки",
+                "url" => "cross_settings_index.php",
+                "more_url" => array(),
+                "title" => "Настройки",
+             ),
+        )
+    );
+    $aModuleMenu[] = $aMenu;
+}
+
+//Добавление в title номер страницы
+AddEventHandler('main', 'OnEpilog', array('CMainHandlers', 'OnEpilogHandler'));
+class CMainHandlers
+{
+    public static function OnEpilogHandler()
+    {
+        global $APPLICATION;
+        $requestsKeys = array_keys($_REQUEST);
+        foreach ($requestsKeys as $requestsKey) {
+            if (mb_ereg_match('PAGEN_', $requestsKey)) {
+                if (isset($_REQUEST[$requestsKey]) && intval($_REQUEST[$requestsKey]) > 0) {
+                    $title = $APPLICATION->GetPageProperty("title");
+                    $APPLICATION->SetPageProperty('title', $title . ' | Страница ' . intval($_REQUEST[$requestsKey]));
+                    // $APPLICATION->AddHeadString('<link href="https://' . $_SERVER['HTTP_HOST'] . strtok($_SERVER[REQUEST_URI], '?') . '" rel="canonical" />', true);
+                    break;
+                }
+            }
+        }
+    }
+}
+
+//Добавление в head canonical
+$requestsKeys = array_keys($_REQUEST);
+foreach ($requestsKeys as $requestsKey) {
+    if (mb_ereg_match('PAGEN_', $requestsKey)) {
+        if (isset($_REQUEST[$requestsKey]) && intval($_REQUEST[$requestsKey]) > 0) {
+            $APPLICATION->AddHeadString('<link rel="canonical" href="https://' . $_SERVER['SERVER_NAME'] . strtok($_SERVER[REQUEST_URI], '?') . '"/>', true);
+            break;
+        }
+    }
+}

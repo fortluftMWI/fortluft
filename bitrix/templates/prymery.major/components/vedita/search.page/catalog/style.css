@@ -1,0 +1,9 @@
+.search-page form{
+    display: flex;
+}
+.search-page  input[type=text]{
+    width: 100%;
+    padding: 8px 15px;
+    font-size: 13px;
+    outline: none;
+}

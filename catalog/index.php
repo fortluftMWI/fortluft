@@ -1,5 +1,6 @@
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
-$APPLICATION->SetPageProperty("description", "Мы предлагаем широкий ассортимент качественных деталей для ремонта и тюнинга автомобильной выхлопной системы.");
+$APPLICATION->SetPageProperty("title", "Каталог автозапчастей | FORTLUFT");
+$APPLICATION->SetPageProperty("description", "В нашем каталоге Вы можете найти и заказать большое количество качественных запчастей для самых популярных марок авто. ✅ FORTLUFT - это собственное производство, доступные цены и постоянные скидки на продукцию. ✅ Всегда в наличии эксклюзивные универсальные детали, доставка по России.");
 use \Bitrix\Main\Config\Option;
 $APPLICATION->SetTitle("Каталог");
 
@@ -52,7 +53,7 @@ $APPLICATION->IncludeComponent(
 		"CACHE_GROUPS" => "N",
 		"USE_MAIN_ELEMENT_SECTION" => "N",
 		"DETAIL_STRICT_SECTION_CHECK" => "N",
-		"SET_LAST_MODIFIED" => "N",
+		"SET_LAST_MODIFIED" => "Y",
 		"SET_TITLE" => "Y",
 		"ADD_SECTIONS_CHAIN" => "Y",
 		"ADD_ELEMENT_CHAIN" => "Y",
@@ -118,7 +119,7 @@ $APPLICATION->IncludeComponent(
 		"LIST_SLIDER_PROGRESS" => "N",
 		"DETAIL_META_KEYWORDS" => "-",
 		"DETAIL_META_DESCRIPTION" => "-",
-		"DETAIL_BROWSER_TITLE" => "NAME",
+		"DETAIL_BROWSER_TITLE" => "-",
 		"DETAIL_SET_CANONICAL_URL" => "N",
 		"SECTION_ID_VARIABLE" => "SECTION_ID",
 		"DETAIL_CHECK_SECTION_ID_VARIABLE" => "N",

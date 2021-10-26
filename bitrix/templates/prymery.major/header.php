@@ -4,6 +4,15 @@ global $APPLICATION;
 
 use Bitrix\Main\Page\Asset;
 $bIncludedModule = (\Bitrix\Main\Loader::includeModule("prymery.major")); ?>
+
+<?
+define("SITE_SERVER_PROTOCOL", (CMain::IsHTTPS()) ? "https://" : "http://"); // Переменная определяет протокол, по которому работает ваш сайт
+$curPage = $APPLICATION->GetCurPage(); // Получаем текущий адрес страницы
+
+$socialLogo = SITE_TEMPLATE_PATH . '/assets/img/logo_for_social.png';
+$APPLICATION->SetPageProperty("og:image", SITE_SERVER_PROTOCOL . $_SERVER['HTTP_HOST'] . $socialLogo);
+?>
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?= LANGUAGE_ID ?>" lang="<?= LANGUAGE_ID ?>">
 <head>
@@ -86,6 +95,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     $GLOBALS["PAGE"] = explode("/", $APPLICATION->GetCurPage());
     $APPLICATION->ShowHead();
 	$APPLICATION->IncludeFile($APPLICATION->GetTemplatePath(SITE_DIR . "include_areas/ru/counter_header.php"),Array(),Array("MODE"=>"php"));?>
+
+	<meta property="og:url" content="<?=SITE_SERVER_PROTOCOL . $_SERVER['HTTP_HOST'] . $curPage?>">
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="<? $APPLICATION->ShowTitle() ?>">
+	<meta property="og:description" content="<?=$APPLICATION->ShowProperty("description")?>">
+	<meta property="og:image" content="<?= $APPLICATION->ShowProperty("og:image") ?>">
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
@@ -125,7 +140,7 @@ while($ob = $res->GetNextElement())
 		<div class="container">
 			<div class="row align-items-center">
 				<div class="col-7 col-md-3 col-xl-2">
-					<div class="header-logo">
+					<div class="header-logo" itemscope itemtype="http://schema.org/Organization">
 						<?=PRmajor::DisplayLogo();?>
 					</div>
 				</div>
@@ -177,7 +192,18 @@ while($ob = $res->GetNextElement())
     ); ?>
 	<div class="info-line">
 		<div class="container">
-			<div class="row justify-content-center justify-content-lg-between">
+			<div class="row justify-content-center justify-content-lg-between" itemscope itemtype="http://schema.org/LocalBusiness">
+				<?
+				$rsSites = CSite::GetByID(SITE_ID);
+				$arSite = $rsSites->Fetch();
+				?>
+				<meta itemprop="name" content="<?= $arSite['SITE_NAME'] ?>">
+				<meta itemprop="description" content="FORTLUFT - это собственное производство запчастей для тюнинга, доступные цены и постоянные скидки на продукцию. Всегда в наличии эксклюзивные универсальные детали, доставка по России.">
+				<link itemprop="url" href="<?=SITE_SERVER_PROTOCOL . $_SERVER['HTTP_HOST']?>">
+				<?if($PRmajorOptions['EMAIL_DEF']){?>
+					<meta itemprop="email" content="<?= $PRmajorOptions['EMAIL_DEF']?>">
+				<?}?>
+
 				<div class="col-6 col-lg-auto">
 					<?if($PRmajorOptions['PHONE_FIRST']):?>
 						<div class="contact-item">
@@ -186,7 +212,7 @@ while($ob = $res->GetNextElement())
 							</div>
 							<div class="contact-content">
 								<div class="contact-title">
-									<a href="tel:<?=$PRmajorOptions['PHONE_FIRST']?>"><?=$PRmajorOptions['PHONE_FIRST']?></a>
+									<a itemprop="telephone" href="tel:<?=$PRmajorOptions['PHONE_FIRST']?>"><?=$PRmajorOptions['PHONE_FIRST']?></a>
 								</div>
 								<?if($PRmajorOptions['PHONE_FIRST_DESC']):?>
 									<div class="contact-description">
@@ -227,7 +253,7 @@ while($ob = $res->GetNextElement())
 									<div class="contact-description">
 										<?=$PRmajorOptions['WORK_TIME_DESC']?>
 									</div>
-									<div class="contact-title">
+									<div class="contact-title" itemprop="openingHours">
 										<?=$PRmajorOptions['WORK_TIME_VALUE']?>
 									</div>
 								</div>
@@ -290,7 +316,7 @@ while($ob = $res->GetNextElement())
 				</div>
 				<div class="col-12 col-md-8 col-lg order-6 order-lg-2">
                     <?$APPLICATION->IncludeComponent(
-	"bitrix:search.title", 
+	"vedita:search.title", 
 	"header", 
 	array(
 		"SHOW_INPUT" => "Y",

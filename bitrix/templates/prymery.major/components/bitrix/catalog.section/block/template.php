@@ -24,7 +24,7 @@ if(!$arParams['JS_ID_OFFERS']){$arParams['JS_ID_OFFERS'] = substr(str_shuffle('A
                             </div>
                             <a href="javascript:void(0)" class="add-favorites to_favorites" data-id="<?=$arItem['ID']?>"><svg><use xlink:href="#star"></use></svg></a>
                             <?if($arItem['PREVIEW_PICTURE']['SRC']):?>
-                                <a href="<?=$arItem['DETAIL_PAGE_URL']?>" class="thumb-link"><img src="<?=$arItem['PREVIEW_PICTURE']['SRC']?>" alt="<?=$arItem['NAME']?>"></a>
+                                <a href="<?=$arItem['DETAIL_PAGE_URL']?>" class="thumb-link"><img src="<?=$arItem['PREVIEW_PICTURE']['SRC']?>" alt="<?=$arItem['NAME']?>" title="<?=$arItem['NAME']?>"></a>
                             <?endif;?>
                             <?if($arItem['PROPERTIES']['STICKER_HIT']['VALUE']):?><div class="label label--hit"><?=GetMessage('CATALOG_HIT');?></div><?endif;?>
 							<a data-fancybox data-type="ajax" data-src="/local/ajax/fast_view.php?element_id=<?=$arItem['ID']?>" class="fast_view_btn" href="javascript:void(0)"><?=GetMessage('FAST_VIEW');?></a>

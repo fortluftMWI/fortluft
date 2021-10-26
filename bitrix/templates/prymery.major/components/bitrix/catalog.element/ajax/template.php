@@ -5,9 +5,10 @@ use \Bitrix\Main\Localization\Loc;
 
 ?>
 <div class="product-item noBottomRadius">
-<a href="jvascript:void(0)" class="fancyclose" onclick="$.fancybox.close();">×</a>
 	<div class="row">
+	
 		<div class="col-12 col-lg-5">
+		
 			<div class="labels">
 				<? if ($arResult['PROPERTIES']['STICKER_HIT']['VALUE']): ?>
 					<div class="label label-new"><?= GetMessage('CATALOG_NEW'); ?></div>
@@ -15,6 +16,8 @@ use \Bitrix\Main\Localization\Loc;
 				<?if($arResult['PROPERTIES']['STICKER_NEW']['VALUE']):?>
 					<div class="label label-hit"><?=GetMessage('CATALOG_HIT');?></div>
 				<?endif;?>
+				
+			<a href="javascript:void(0)" class="fancyclose" onclick="$.fancybox.close();">×</a>
 			</div>
 			
 			<?if($arResult['DISCOUNT']['type'] == 'P' && $arResult['DISCOUNT']['value']){?>
@@ -23,29 +26,29 @@ use \Bitrix\Main\Localization\Loc;
             <div class="product-item__thumb">
                 <a href="javascript:void(0)" class="add-favorites to_favorites custom-favorites" data-id="<?=$arResult['ID']?>"><svg><use xlink:href="#star"></use></svg></a>
                 <div class="slider-container">
-					<div class="product-item__slider">
+					<div class="product-item__slider ajax_slider">
 						<? if ($arResult['DETAIL_PICTURE']['RESIZE']['BIG']['src']): ?>
-							<div class="slide"><a href="<?=$arResult['DETAIL_PICTURE']['SRC']?>" data-fancybox="gallery"><img src="<?= $arResult['DETAIL_PICTURE']['RESIZE']['BIG']['src'] ?>" alt="<?= $arResult['NAME'] ?>"></a></div>
+							<div class="slide"><a href="<?=$arResult['DETAIL_PICTURE']['SRC']?>" data-fancybox="gallery"><img src="<?= $arResult['DETAIL_PICTURE']['RESIZE']['BIG']['src'] ?>" alt="<?= $arResult['NAME'] ?>" title="<?= $arResult['NAME'] ?>"></a></div>
 						<? endif; ?>
 						<? if ($arResult['PHOTOS']): ?>
 							<? foreach ($arResult['PHOTOS'] as $photo): ?>
-								<div class="slide"><a href="<?=$photo['BIG']['src']?>" data-fancybox="gallery"> <img src="<?= $photo['BIG']['src'] ?>" alt="<?= $photo['DESCRIPTION'] ?>"></a></div>
+								<div class="slide"><a href="<?=$photo['BIG']['src']?>" data-fancybox="gallery"> <img src="<?= $photo['BIG']['src'] ?>" alt="<?= $photo['DESCRIPTION'] ?>" title="<?= $photo['DESCRIPTION'] ?>"></a></div>
 							<? endforeach; ?>
 						<? endif; ?>
 					</div>
 					<div class="product-arrows">
-						<div class="product-arrow product-item-prev"><svg class="icon"><use xlink:href="#angle-left"></use></svg></div>
-						<div class="product-arrow product-item-next"><svg class="icon"><use xlink:href="#angle-right"></use></svg></div>
+						<div class="product-arrow product-item-prev ajax_slider"><svg class="icon"><use xlink:href="#angle-left"></use></svg></div>
+						<div class="product-arrow product-item-next ajax_slider"><svg class="icon"><use xlink:href="#angle-right"></use></svg></div>
 					</div>
 				</div>
                 <?if($arResult['PHOTOS']):?>
                     <div class="slider-container">
-                        <div class="product-item__thumbs">
+                        <div class="product-item__thumbs ajax_slider">
                             <? if ($arResult['DETAIL_PICTURE']['RESIZE']['SMALL']['src']): ?>
-                                <div class="slide"><img src="<?= $arResult['DETAIL_PICTURE']['RESIZE']['SMALL']['src'] ?>" alt="<?= $arResult['NAME'] ?>"></div>
+                                <div class="slide"><img src="<?= $arResult['DETAIL_PICTURE']['RESIZE']['SMALL']['src'] ?>" alt="<?= $arResult['NAME'] ?>" title="<?= $arResult['NAME'] ?>"></div>
                             <? endif; ?>
                             <? foreach ($arResult['PHOTOS'] as $photo): ?>
-                                <div class="slide"><img src="<?= $photo['SMALL']['src'] ?>" alt="<?= $photo['DESCRIPTION'] ?>"></div>
+                                <div class="slide"><img src="<?= $photo['SMALL']['src'] ?>" alt="<?= $photo['DESCRIPTION'] ?>" title="<?= $photo['DESCRIPTION'] ?>"></div>
                             <? endforeach; ?>
                         </div>
                     </div>
@@ -224,7 +227,7 @@ use \Bitrix\Main\Localization\Loc;
                                 <?foreach($arResult['ADVANTAGES'] as $adv):?>
                                     <li>
                                         <span data-toggle="tooltip" data-placement="top" data-html="true" title="" data-original-title="<?=$adv['NAME']?>">
-                                            <img src="<?=CFile::GetPath($adv['PREVIEW_PICTURE']);?>" alt="<?=$adv['NAME']?>">
+                                            <img src="<?=CFile::GetPath($adv['PREVIEW_PICTURE']);?>" alt="<?=$adv['NAME']?>" title="<?=$adv['NAME']?>">
                                         </span>
                                     </li>
                                 <?endforeach;?>
@@ -244,5 +247,26 @@ use \Bitrix\Main\Localization\Loc;
         BX.message({
             CATALOG_ARTICLE_DETAIL: '<?=GetMessageJS('CATALOG_ARTICLE_DETAIL')?>',
         });
+		
+		$(".product-item__slider.ajax_slider").slick({
+			slidesToShow: 1, // сколько слайдов сразу
+			slidesToScroll: 1, // сколько слайдов перематывать
+			swipeToSlide: true,
+			touchThreshold: 30,
+			prevArrow: $('.product-item-prev.ajax_slider'),
+			nextArrow: $('.product-item-next.ajax_slider'),
+			asNavFor: '.product-item__thumbs.ajax_slider',
+		});
+		$(".product-item__thumbs.ajax_slider").slick({
+			slidesToShow: 1,
+			slidesToScroll: 1,
+			swipeToSlide: true,
+			arrows: false,
+			touchThreshold: 30,
+			asNavFor: '.product-item__slider.ajax_slider',
+			focusOnSelect: true,
+			variableWidth: true,
+			centerMode: true,
+		});
     </script>
 </div>

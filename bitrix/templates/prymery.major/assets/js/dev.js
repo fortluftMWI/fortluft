@@ -120,6 +120,12 @@ $(document).ready(function(){
             var url = $(this).attr('action');
             var successtext = $(this).data('success');
             var dataForm = $(this).serialize();
+			Comagic.addOfflineRequest({
+				name: $(this).find('#quick_order_form_FIO').val(),
+				email: $(this).find('#quick_order_form_PHONE').val(),
+				phone: $(this).find('#quick_order_form_EMAIL').val(),
+				message: $(this).find('#quick_order_form_COMMENT').val(),
+			});
             getFormOneClick(name,url,dataForm,successtext);
         }
     });

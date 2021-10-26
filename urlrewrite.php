@@ -16,6 +16,14 @@ $arUrlRewrite=array (
     'PATH' => '/bitrix/services/ymarket/index.php',
     'SORT' => 100,
   ),
+  11 => 
+  array (
+    'CONDITION' => '#^/acrit.exportproplus/(.*)#',
+    'RULE' => 'path=$1',
+    'ID' => NULL,
+    'PATH' => '/acrit.exportproplus/index.php',
+    'SORT' => 100,
+  ),
   10 => 
   array (
     'CONDITION' => '#^/catalog/landing/#',
@@ -40,7 +48,7 @@ $arUrlRewrite=array (
     'PATH' => '/services/index.php',
     'SORT' => 100,
   ),
-  9 => 
+  14 => 
   array (
     'CONDITION' => '#^/catalog/#',
     'RULE' => '',
@@ -64,7 +72,7 @@ $arUrlRewrite=array (
     'PATH' => '/sale/index.php',
     'SORT' => 100,
   ),
-  6 => 
+  13 => 
   array (
     'CONDITION' => '#^/blog/#',
     'RULE' => '',

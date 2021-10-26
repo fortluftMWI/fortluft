@@ -18,6 +18,7 @@ class TradingPrintForm extends \CBitrixComponent
 		try
 		{
 			$this->loadModules();
+			$this->setTitle();
 
 			if ($this->getRequestAction() === 'print')
 			{
@@ -29,14 +30,32 @@ class TradingPrintForm extends \CBitrixComponent
 			{
 				$templatePage = $this->formAction();
 			}
+
+			$templatePage = $this->formatTemplateName($templatePage);
 		}
 		catch (Main\SystemException $exception)
 		{
+			$this->disableAutoPrint();
+
 			$this->arResult['ERROR'] = $exception->getMessage();
 			$templatePage = 'exception';
 		}
 
 		$this->includeComponentTemplate($templatePage);
+	}
+
+	protected function setTitle()
+	{
+		global $APPLICATION;
+
+		$APPLICATION->SetTitle($this->getDocument()->getTitle());
+	}
+
+	protected function formatTemplateName($templatePage)
+	{
+		return preg_replace_callback('/[A-Z]+/', static function($matches) {
+			return '-' . Market\Data\TextString::toLower($matches[0]);
+		}, $templatePage);
 	}
 
 	protected function validatePrintRequest()
@@ -70,6 +89,13 @@ class TradingPrintForm extends \CBitrixComponent
 		$this->fillContents($contents);
 
 		return 'print';
+	}
+
+	protected function disableAutoPrint()
+	{
+		global $APPLICATION;
+
+		$APPLICATION->SetPageProperty('YAMARKET_PAGE_PRINT', 'N');
 	}
 
 	protected function getRequestedSettings()
@@ -111,10 +137,19 @@ class TradingPrintForm extends \CBitrixComponent
 
 			$items = $document->loadItems($entitySelect);
 		}
+		else if ($this->needLoad())
+		{
+			if (!isset($entitySelect['ORDER']))
+			{
+				throw new Main\SystemException('only ORDER loading support');
+			}
+
+			$loadResult = $this->loadSelectedOrders($entitySelect['ORDER']);
+			$items = $this->makeItems($loadResult['ORDERS'], 'ORDER');
+		}
 		else
 		{
-			$loadResult = $this->loadSelectedOrders($entitySelect['ORDER']);
-			$items = $this->makeItems($loadResult['ORDERS']);
+			$items = [];
 		}
 
 		return $items;
@@ -169,8 +204,23 @@ class TradingPrintForm extends \CBitrixComponent
 
 			if (!$isLoadMoreRequest)
 			{
-				$loadResult = $this->loadSelectedOrders($selectedOrderIds);
-				$this->fillItems('ITEMS', $loadResult);
+				$document = $this->getDocument();
+
+				if ($document instanceof TradingService\Reference\Document\HasLoadForm)
+				{
+					$items = $document->loadForm([ 'id' => $selectedOrderIds ]);
+					$this->setItems('ITEMS', $items);
+				}
+				else if ($this->getSourceType() === $this->getEntityType())
+				{
+					$loadResult = $this->emulateOrders($selectedOrderIds);
+					$this->fillItems('ITEMS', $loadResult);
+				}
+				else
+				{
+					$loadResult = $this->loadSelectedOrders($selectedOrderIds);
+					$this->fillItems('ITEMS', $loadResult);
+				}
 			}
 
 			if ($this->useAdditionalItems())
@@ -249,6 +299,11 @@ class TradingPrintForm extends \CBitrixComponent
 		);
 	}
 
+	protected function getSourceType()
+	{
+		return $this->getDocument()->getSourceType();
+	}
+
 	protected function getEntityType()
 	{
 		return $this->getDocument()->getEntityType();
@@ -274,7 +329,7 @@ class TradingPrintForm extends \CBitrixComponent
 		$setup = $this->getSetup();
 		$type = $this->getParameter('TYPE');
 
-		return $setup->getService()->getPrinter()->getDocument($type);
+		return $setup->wakeupService()->getPrinter()->getDocument($type);
 	}
 
 	protected function getLang($code, $replace = null, $language = null)
@@ -329,6 +384,14 @@ class TradingPrintForm extends \CBitrixComponent
 		});
 
 		return $loadResult;
+	}
+
+	protected function emulateOrders($orderIds)
+	{
+		return [
+			'ORDERS' => array_map(static function($orderId) { return [ 'ID' => $orderId ]; }, $orderIds),
+			'NEXT_PAGE' => null,
+		];
 	}
 
 	protected function requestOrders(array $parameters = [])
@@ -397,6 +460,15 @@ class TradingPrintForm extends \CBitrixComponent
 		}
 	}
 
+	protected function setItems($resultKey, $items, $page = null)
+	{
+		$baseKey = str_replace('ITEMS', '', $resultKey);
+		$currentPageKey = $baseKey . 'PAGE';
+
+		$this->arResult[$resultKey] = $items;
+		$this->arResult[$currentPageKey] = $page;
+	}
+
 	protected function getNextPageUrl($nextPage)
 	{
 		global $APPLICATION;
@@ -409,9 +481,10 @@ class TradingPrintForm extends \CBitrixComponent
 		return $APPLICATION->GetCurPageParam(http_build_query($query), array_keys($query));
 	}
 
-	protected function makeItems($orders)
+	protected function makeItems($orders, $start = null)
 	{
 		$chain = $this->getItemChain();
+		$chain = $this->applyItemChainStart($chain, $start);
 		$result = [];
 
 		foreach ($orders as $order)
@@ -428,6 +501,82 @@ class TradingPrintForm extends \CBitrixComponent
 	}
 
 	protected function getItemChain()
+	{
+		switch ($this->getSourceType())
+		{
+			case Market\Trading\Entity\Registry::ENTITY_TYPE_LOGISTIC_SHIPMENT:
+				$result = $this->getShipmentItemChain();
+			break;
+
+			case Market\Trading\Entity\Registry::ENTITY_TYPE_ORDER:
+				$result = $this->getOrderItemChain();
+			break;
+
+			default:
+				throw new Main\SystemException('unknown source type');
+		}
+
+		return $result;
+	}
+
+	protected function applyItemChainStart(array $chain, $start)
+	{
+		if ($start === null) { return $chain; }
+
+		$startPosition = array_search($start, $chain, true);
+
+		if ($startPosition === false)
+		{
+			throw new Main\SystemException(sprintf(
+				'cannot start from %s with entity type %s',
+				$start,
+				$this->getEntityType()
+			));
+		}
+
+		array_splice($chain, 0, $startPosition);
+
+		return $chain;
+	}
+
+	protected function getShipmentItemChain()
+	{
+		switch ($this->getEntityType())
+		{
+			case Market\Trading\Entity\Registry::ENTITY_TYPE_LOGISTIC_SHIPMENT:
+				$result = [
+					'LOGISTIC_SHIPMENT',
+				];
+			break;
+
+			case Market\Trading\Entity\Registry::ENTITY_TYPE_ORDER:
+				$result = [
+					'LOGISTIC_SHIPMENT',
+					'ORDER',
+				];
+			break;
+
+			case Market\Trading\Entity\Registry::ENTITY_TYPE_BOX:
+				$result = [
+					'LOGISTIC_SHIPMENT',
+					'ORDER',
+					'SHIPMENT',
+					'BOX',
+				];
+			break;
+
+			case Market\Trading\Entity\Registry::ENTITY_TYPE_NONE:
+				$result = [];
+			break;
+
+			default:
+				throw new Main\SystemException('unknown entity type');
+		}
+
+		return $result;
+	}
+
+	protected function getOrderItemChain()
 	{
 		switch ($this->getEntityType())
 		{

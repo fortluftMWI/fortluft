@@ -14,16 +14,25 @@ if ($curPage != SITE_DIR)
 if(empty($arResult))
     return "";
 
-$strReturn = '<ul class="breadcrumbs-list">';
+$strReturn = '<ul class="breadcrumbs-list" itemscope itemtype="https://schema.org/BreadcrumbList">';
 $num_items = count($arResult);
 for($index = 0, $itemSize = $num_items; $index < $itemSize; $index++)
 {
     $title = htmlspecialcharsex($arResult[$index]["TITLE"]);
 
     if($arResult[$index]["LINK"] <> "" && $index != $itemSize-1)
-        $strReturn .= '<li><a href="'.$arResult[$index]["LINK"].'" title="'.$title.'">'.$title.'</a></li>';
+        $strReturn .= '<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                            <a href="'.$arResult[$index]["LINK"].'" title="'.$title.'" itemprop="item">
+                                <span itemprop="name">'.$title.'</span>
+                                <meta itemprop="position" content='.$index.'">
+                            </a>
+                        </li>';
     else
-        $strReturn .= '<li><span>'.$title.'</span></li>';
+        $strReturn .= '<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                            <span itemprop="item">
+                                <span itemprop="name">'.$title.'</span>
+                            </span>
+                        </li>';
 }
 
 $strReturn .= '</ul>';

@@ -128,3 +128,4 @@ function PrymeryChangeOfferDetail(el){
         $(el).addClass("selected");
     }
 }
+

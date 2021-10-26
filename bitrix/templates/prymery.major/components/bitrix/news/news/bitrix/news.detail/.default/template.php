@@ -10,7 +10,28 @@ if($arResult['PHOTOS']){
 $count_picture = 0;
 ?>
 
-<div class="post-detail">
+<div class="post-detail" itemscope itemtype="https://schema.org/Article">
+    <?
+    // Константа SITE_SERVER_PROTOCOL объявлена в header.php
+    $mainPage = SITE_SERVER_PROTOCOL . $_SERVER['HTTP_HOST'];
+    $curPage = $APPLICATION->GetCurPage(); // Получаем текущий адрес страницы
+    $image = $arResult['DETAIL_PICTURE']['SRC'] ?? $arResult['PREVIEW_PICTURE']['SRC'];
+    $image = $mainPage . $image;
+    ?>
+    <link itemprop="mainEntityOfPage" href="<?= $mainPage . $curPage ?>" />
+    <?if ($image){?>
+        <link itemprop="image" href="<?= $image ?>">
+    <?}?>
+    <meta itemprop="headline name" content="<?= $arResult['NAME'] ?>">
+    <?if($arResult['PREVIEW_TEXT']){?>
+        <meta itemprop="description" content="<?=PRmajor::cut_string($arResult['~PREVIEW_TEXT'],150)?>">
+    <?}?>
+    <meta itemprop="author" content="FORTLUFT">
+    <?
+    $datePublished = CDatabase::FormatDate($arResult['DISPLAY_ACTIVE_FROM'], false, "YYYY-MM-DD");
+    ?>
+    <meta itemprop="datePublished" datetime="<?= $datePublished ?>" content="<?= $datePublished ?>">
+    
     <?if($arResult['PROPERTIES']['TAGS']['VALUE']):?>
         <ul class="post-category">
             <?foreach($arResult['PROPERTIES']['TAGS']['VALUE'] as $tag):?>
@@ -92,7 +113,7 @@ $count_picture = 0;
             <?endif;?>
         <?endif;?>
     </ul>
-    <div class="post-text page_simple">
+    <div class="post-text page_simple" itemprop="articleBody">
         <?if($arResult['DETAIL_TEXT']):?>
             <?=$arResult['~DETAIL_TEXT'];?>
         <?endif;?>

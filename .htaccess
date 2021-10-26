@@ -16,6 +16,17 @@ ErrorDocument 404 /404.php
 
 	RewriteCond %{HTTP_HOST} ^www\.(.*)$
     RewriteRule ^(.*)$ https://%1/$1 [L,R=301]
+
+	#убираем /index.php в конце алиаса
+	RewriteCond %{REQUEST_URI} ^(.*)/index\.php$
+	RewriteCond %{THE_REQUEST} !bitrix/admin/
+	RewriteRule ^(.*)index\.php$ https://%{HTTP_HOST}/$1 [R=301,L]
+
+	#редирект на версию со /
+	RewriteBase /
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_URI} !(.*)/$
+	RewriteRule ^(.*[^/])$ $1/ [L,R=301]
     
 	RewriteCond %{REQUEST_FILENAME} !-f
 	RewriteCond %{REQUEST_FILENAME} !-l
@@ -51,3 +62,9 @@ Redirect 301 /catalog/vpusknaya_sistema/silikonovye_patrubki_i_shlangi/izgiby_pe
 Redirect 301 /catalog/vpusknaya_sistema/silikonovye_patrubki_i_shlangi/t_obraznye_patrubki_1/	/catalog/vpusknaya_sistema/silikonovye_patrubki_i_shlangi/t_obraznye_patrubki/
 Redirect 301 /catalog/vpusknaya_sistema/alyuminievye_truby/pryamye_truby_2/	/catalog/vpusknaya_sistema/alyuminievye_truby/pryamye_truby/
 Redirect 301 /catalog/vpusknaya_sistema/alyuminievye_truby/izgiby_2/	/catalog/vpusknaya_sistema/alyuminievye_truby/izgiby/
+
+Redirect 301 /catalog/elektrika/ustroystvo_dlya_zapuska_dvigatelya_i_zaryadki_tekhniki/portativnoe/ https://fortluft.ru/
+Redirect 301 /catalog/elektrika/ustroystvo_dlya_zapuska_dvigatelya_i_za­ryadki_tekhniki/ https://fortluft.ru/
+Redirect 301 /catalog/elektrika/ustroystvo_dlya_zapuska_dvigatelya_i_zaryadki_tekhniki_12000mah_js001/ https://fortluft.ru/
+Redirect 301 /catalog/vykhlopnaya_sistema/glushiteli/seriya_performance/moto_glushitel_pmt413_seriya_moto/ /catalog/vykhlopnaya_sistema/glushiteli/seriya_performance/
+Redirect 301 /catalog/vykhlopnaya_sistema/katalizatory/universalnye_katalizatory/remontnyy_blok_katalizatora_10180me4_/ /catalog/vykhlopnaya_sistema/katalizatory/universalnye_katalizatory/

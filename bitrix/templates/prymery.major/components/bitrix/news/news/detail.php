@@ -71,7 +71,7 @@ $this->setFrameMode(true);
 		"DISPLAY_PREVIEW_TEXT" => "N",
 		"AJAX_MODE" => "N",
 		"IBLOCK_TYPE" => "prymery_content",
-		"IBLOCK_ID" => PRmajor::CIBlock_Id("prymery_content","prymery_blog"),
+		"IBLOCK_ID" => PRmajor::CIBlock_Id("prymery_major_content","prymery_major_blog"),
 		"NEWS_COUNT" => "3",
 		"SORT_BY1" => "ACTIVE_FROM",
 		"SORT_ORDER1" => "DESC",

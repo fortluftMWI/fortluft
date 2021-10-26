@@ -47,6 +47,7 @@ $APPLICATION->SetTitle("Поставщикам");
                     ),
                     "COMPONENT_TEMPLATE" => ".default",
                     "PRYMERY_MODULE_ID" => 'prymery.major',
+					"MAIL_THEME" => 'На сайте заполнена форма обратной связи «Поставщикам»',
                     "EMAIL_TO" => "info@fortluft.ru",
                     /*"EMAIL_TO" => Option::get("prymery.major", "EMAIL_DEF_NOTIFICATION",'',SITE_ID),*/
                     "SUCCESS_MESSAGE_TITLE" => "Сообщение отправлено",

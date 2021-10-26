@@ -25,12 +25,16 @@ $this->setFrameMode(true);
                 <?else:?>
                     <div class="col-12 col-md-6 col-lg-6">
                         <div class="form-group is-empty">
-                            <input placeholder="<?=GetMessage('PRYMERY_FF_FIELD_'.$field['CODE'])?><?= ($field['REQUIRED'] == 'Y') ? GetMessage('PRYMERY_REQUIRED') : '' ?>" class="form-control<?= ($field['REQUIRED'] == 'Y') ? ' required' : '' ?>" name="<?= $field['CODE'] ?>" type="text">
+                            <input placeholder="<?=GetMessage('PRYMERY_FF_FIELD_'.$field['CODE'])?><?= ($field['REQUIRED'] == 'Y') ? GetMessage('PRYMERY_REQUIRED') : '' ?>" class="form-control<?= ($field['REQUIRED'] == 'Y') ? ' required' : '' ?>" name="<?= $field['CODE'] ?>" 
+							type="<?= ($field['CODE'] == "EMAIL" ? "email" : ($field['CODE'] == "PHONE" ? "tel" : "text")); ?>">
                         </div>
                     </div>
                 <?endif;
             }?>
         <?}?>
+		<?if($arParams['MAIL_THEME']){?>
+			<input type="hidden" name="mail_theme" value="<?=$arParams['MAIL_THEME']?>">
+		<?}?>
         <div class="col-12">
             <button type="submit" class="btn-submit adp-btn adp-btn-primary"><?=$arParams['~BUTTON']?></button>
         </div>

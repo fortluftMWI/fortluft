@@ -7920,7 +7920,7 @@ li.pagination-current {
 	z-index:111;
 }
 .appendig_find_city{
-	display:none;    
+	display:none;
 	position: absolute;
     z-index: 9;
     background: #fff;
@@ -7966,7 +7966,7 @@ li.pagination-current {
 .fancyclose{
 	position: absolute;
     top: 0;
-    left: 10px;
+    left: 0;
     font-size: 3em;
     z-index: 9999;
     color: #777;
@@ -8162,3 +8162,6 @@ li.pagination-current {
 }
 
 /*посадочная страница конец*/
+
+.review__description h2 { margin-bottom: 20px; }
+.review__description ul { list-style: disc; margin: 0 0 20px 30px; }

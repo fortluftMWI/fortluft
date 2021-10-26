@@ -173,7 +173,7 @@ $(document).ready(function(){
 	$("body").on("click", ".filter__title", function(){
 		$(this).next().slideToggle().parent().toggleClass("deployed");
 	});
-	$(".dropdown-link__header").on("click", function(){
+	$(document).on("click", '.dropdown-link__header', function(){
 		$(this).toggleClass("open").next().slideToggle();
 	});
 
@@ -237,15 +237,15 @@ $(document).ready(function(){
     });
 
 	/* tabs */
-	$('ul.tabs li.tab-link').click(function(){
+	$(document).on('click','ul.tabs li.tab-link',function(){
 		var currentTabOpen = $(this).parent().find('.current').attr('data-tab');
 		var tab_id = $(this).attr('data-tab');
 
 		$(this).parent().find('li.tab-link').removeClass('current');
 		$(this).addClass('current');
 
-		$("#"+currentTabOpen).removeClass('current');
-		$("#"+tab_id).addClass('current');
+		$(this).closest('.product-item__info').find("#"+currentTabOpen).removeClass('current');
+		$(this).closest('.product-item__info').find("#"+tab_id).addClass('current');
 
 		$('.product-slider').resize();
 	});
@@ -369,9 +369,9 @@ BX.addCustomEvent('onAjaxSuccess', function(){
 		console.log($(this));
 		$(this).next().slideToggle().parent().toggleClass("deployed");
 	}); */
-	$(".dropdown-link__header").on("click", function(){
+	/* $(".dropdown-link__header").on("click", function(){
 		$(this).toggleClass("open").next().slideToggle();
-	});
+	}); */
 
 	$(".faq__header").on("click", function(){
 		$(this).toggleClass("open").next().slideToggle();
@@ -433,7 +433,7 @@ BX.addCustomEvent('onAjaxSuccess', function(){
 	});
 
 	/* tabs */
-	$('ul.tabs li.tab-link').click(function(){
+	/* $(document).on('click','ul.tabs li.tab-link', function(){
 		var currentTabOpen = $(this).parent().find('.current').attr('data-tab');
 		var tab_id = $(this).attr('data-tab');
 
@@ -444,7 +444,7 @@ BX.addCustomEvent('onAjaxSuccess', function(){
 		$("#"+tab_id).addClass('current');
 
 		$('.product-slider').resize();
-	});
+	}); */
 
 	/* quantity */
 	/*$('.quantity-plus').click(function () {
@@ -486,7 +486,7 @@ BX.addCustomEvent('onAjaxSuccess', function(){
 });
 
 function flyToCart() {
-    $('.add-basket, .fly_basket').on('click', function () {
+    $(document).on('click', '.add-basket, .fly_basket', function () {
         event.preventDefault();
         var cart = $('.cartContent');
         var imgtodrag = $(this).closest('.product, .fly_content').find(".fly-icon").eq(0);
